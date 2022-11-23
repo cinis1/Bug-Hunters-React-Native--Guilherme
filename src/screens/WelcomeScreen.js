@@ -6,7 +6,7 @@ export default function WelcomeScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <Image
-          style={styles.image}
+          style={styles.logo}
           resizeMode="contain"
           source={require('../assets/images/logo.png')}
         />
@@ -20,8 +20,8 @@ export default function WelcomeScreen() {
           <Text style={styles.welcomeMessageFragment}>Caçador!</Text>
         </Text>
         <Text style={styles.appDescription}>
-          Enfrete os bugs mais assustadores que você consegui encontrar e ganhe
-          as melhores recompensar!
+          Enfrete os bugs mais assustadores que você conseguir encontrar e ganhe
+          as melhores recompensas!
         </Text>
       </View>
       <View style={styles.bottom}>
@@ -55,13 +55,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
-  image: {
+  logo: {
     width: 270,
     height: 135,
   },
   logoName: {
     color: 'white',
     fontSize: 32,
+    fontWeight: '700',
   },
   welcomeMessage: {
     color: 'white',

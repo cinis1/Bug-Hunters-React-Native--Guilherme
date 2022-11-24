@@ -8,37 +8,35 @@ import {
 } from 'react-native';
 import React, {Component} from 'react';
 
-export default class LoginScreen extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.goBackButton} />
-        </View>
-        <View style={styles.logoBox}>
-          <Image
-            style={styles.logo}
-            resizeMode="contain"
-            source={require('../assets/images/logo.png')}
-          />
-          <Text style={styles.logoName}>Bug Hunters</Text>
-        </View>
-        <View style={styles.inputBox}>
-          <Text style={styles.charInputMessage}>{'Entrar'}</Text>
-          <TextInput
-            placeholder="Nome do personagem"
-            style={styles.charInputBox}
-          />
-        </View>
-        <View style={styles.createCharButtonBox}>
-          <TouchableOpacity style={styles.loginButton}>
-            <Text style={styles.loginbButtonLabel}>Entrar</Text>
-          </TouchableOpacity>
-        </View>
+const LoginScreen = () => {
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.goBackButton} />
       </View>
-    );
-  }
-}
+      <View style={styles.logoBox}>
+        <Image
+          style={styles.logo}
+          resizeMode="contain"
+          source={require('../assets/images/logo.png')}
+        />
+        <Text style={styles.logoName}>Bug Hunters</Text>
+      </View>
+      <View style={styles.inputBox}>
+        <Text style={styles.charInputMessage}>{'Entrar'}</Text>
+        <TextInput
+          placeholder="Nome do personagem"
+          style={styles.charInputBox}
+        />
+      </View>
+      <View style={styles.createCharButtonBox}>
+        <TouchableOpacity style={styles.loginButton}>
+          <Text style={styles.loginbButtonLabel}>Entrar</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -111,3 +109,4 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 });
+export default LoginScreen;

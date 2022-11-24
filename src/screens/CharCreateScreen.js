@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React from 'react';
 
-export default function CharCreateScreen() {
+const CharCreateScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -51,7 +51,7 @@ export default function CharCreateScreen() {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -167,3 +167,4 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 });
+export default CharCreateScreen;

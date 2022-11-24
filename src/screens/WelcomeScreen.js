@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-export default function WelcomeScreen() {
+const WelcomeScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -35,7 +35,7 @@ export default function WelcomeScreen() {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -105,3 +105,4 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 });
+export default WelcomeScreen;

@@ -1,101 +1,111 @@
 import {Text, StyleSheet, View, TouchableOpacity, Image} from 'react-native';
 import React, {Component} from 'react';
 
-export default class CharacterInformation extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.goBackButton}>
-            <Text>{'<'}</Text>
-          </TouchableOpacity>
+const CharacterInformation = () => {
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.goBackButton}>
+          <Text>{'<'}</Text>
+        </TouchableOpacity>
 
-          <Image
-            resizeMode="contain"
-            style={styles.logo}
-            source={require('../assets/images/logo.png')}
-          />
-        </View>
-        <View style={styles.charInfoBox}>
-          <Text style={styles.charNameDisplay}>Caneta Azul</Text>
-          <View style={styles.statsBox}>
-            <View style={styles.statsBoxContent}>
-              <View style={styles.statAndNameBox}>
-                <Image
-                  resizeMode="contain"
-                  style={styles.statIcon}
-                  source={require('../assets/images/icon-sword.png')}
-                />
-                <Text style={styles.statName}>Ataque</Text>
-              </View>
-              <Text style={styles.statValue}>80</Text>
-            </View>
-            <View style={styles.statsBoxContent}>
-              <View style={styles.statAndNameBox}>
-                <Image
-                  resizeMode="contain"
-                  style={styles.statIcon}
-                  source={require('../assets/images/icon-shield.png')}
-                />
-                <Text style={styles.statName}>Defesa</Text>
-              </View>
-              <Text style={styles.statValue}>80</Text>
-            </View>
-            <View style={styles.statsBoxContent}>
-              <View style={styles.statAndNameBox}>
-                <Image
-                  resizeMode="contain"
-                  style={styles.statIcon}
-                  source={require('../assets/images/icon-heart.png')}
-                />
-                <Text style={styles.statName}>Vida</Text>
-              </View>
-              <Text style={styles.statValue}>80</Text>
-            </View>
-            <View style={styles.statsBoxContent}>
-              <View style={styles.statAndNameBox}>
-                <Image
-                  resizeMode="contain"
-                  style={styles.statIcon}
-                  source={require('../assets/images/icon-sword.png')}
-                />
-                <Text style={styles.statName}>Agilidade</Text>
-              </View>
-              <Text style={styles.statValue}>80</Text>
-            </View>
+        <Image
+          resizeMode="contain"
+          style={styles.logo}
+          source={require('../assets/images/logo.png')}
+        />
+      </View>
+      <View style={styles.charInfoBox}>
+        <View style={styles.infoBoxHeader}>
+          <View style={styles.charNameView}>
+            <Text style={styles.charNameDisplay}>Caneta Azul</Text>
+          </View>
+          <View style={styles.goldDisplayBox}>
+            <Image
+              resizeMode="contain"
+              style={styles.goldIcon}
+              source={require('../assets/images/coin.png')}
+            />
+            <Text style={styles.goldDisplay}>80</Text>
           </View>
         </View>
-        <View style={styles.navigationBox}>
-          <TouchableOpacity style={styles.storeButton}>
-            <View style={styles.storeIconBox}>
+        <View style={styles.statsBox}>
+          <View style={styles.statsBoxContent}>
+            <View style={styles.statAndNameBox}>
               <Image
-                style={styles.storeIcon}
                 resizeMode="contain"
-                source={require('../assets/images/treasure.png')}
+                style={styles.statIcon}
+                source={require('../assets/images/icon-sword.png')}
               />
+              <Text style={styles.statName}>Ataque</Text>
             </View>
-            <View style={styles.storeBLabelBox}>
-              <Text style={styles.storeBLabel}>Loja</Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.questsButton}>
-            <View style={styles.questsIconBox}>
+            <Text style={styles.statValue}>80</Text>
+          </View>
+          <View style={styles.statsBoxContent}>
+            <View style={styles.statAndNameBox}>
               <Image
-                style={styles.questsIcon}
                 resizeMode="contain"
-                source={require('../assets/images/quest.png')}
+                style={styles.statIcon}
+                source={require('../assets/images/icon-shield.png')}
               />
+              <Text style={styles.statName}>Defesa</Text>
             </View>
-            <View style={styles.questsBLabelBox}>
-              <Text style={styles.questsBLabel}>Quests</Text>
+            <Text style={styles.statValue}>80</Text>
+          </View>
+          <View style={styles.statsBoxContent}>
+            <View style={styles.statAndNameBox}>
+              <Image
+                resizeMode="contain"
+                style={styles.statIcon}
+                source={require('../assets/images/icon-heart.png')}
+              />
+              <Text style={styles.statName}>Vida</Text>
             </View>
-          </TouchableOpacity>
+            <Text style={styles.statValue}>80</Text>
+          </View>
+          <View style={styles.statsBoxContent}>
+            <View style={styles.statAndNameBox}>
+              <Image
+                resizeMode="contain"
+                style={styles.statIcon}
+                source={require('../assets/images/icon-sword.png')}
+              />
+              <Text style={styles.statName}>Agilidade</Text>
+            </View>
+            <Text style={styles.statValue}>80</Text>
+          </View>
         </View>
       </View>
-    );
-  }
-}
+      <View style={styles.navigationBox}>
+        <TouchableOpacity style={styles.storeButton}>
+          <View style={styles.storeIconBox}>
+            <Image
+              style={styles.storeIcon}
+              resizeMode="contain"
+              source={require('../assets/images/treasure.png')}
+            />
+          </View>
+          <View style={styles.storeBLabelBox}>
+            <Text style={styles.storeBLabel}>Loja</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.questsButton}>
+          <View style={styles.questsIconBox}>
+            <Image
+              style={styles.questsIcon}
+              resizeMode="contain"
+              source={require('../assets/images/quest.png')}
+            />
+          </View>
+          <View style={styles.questsBLabelBox}>
+            <Text style={styles.questsBLabel}>Quests</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -139,6 +149,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     marginLeft: 10,
+    fontWeight: '600',
   },
   statValue: {
     color: 'white',
@@ -150,9 +161,8 @@ const styles = StyleSheet.create({
   },
   charNameDisplay: {
     color: 'white',
-    fontSize: 40,
+    fontSize: 32,
     fontWeight: '700',
-    paddingBottom: 30,
   },
 
   goBackButton: {
@@ -217,4 +227,25 @@ const styles = StyleSheet.create({
     height: 110,
     width: 110,
   },
+  infoBoxHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  goldDisplayBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  goldDisplay: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: 'gold',
+    marginLeft: 10,
+  },
+  goldIcon: {
+    height: 20,
+    width: 20,
+  },
+  charNameView: {},
 });
+export default CharacterInformation;

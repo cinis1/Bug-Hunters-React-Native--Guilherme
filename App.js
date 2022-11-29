@@ -5,8 +5,9 @@ import LoginScreen from './src/screens/LoginScreen';
 import CharCreateScreen from './src/screens/CharCreateScreen';
 import CharacterInformation from './src/screens/CharacterInformation';
 import Sla from './src/screens/Sla';
-import StoreScreen from './src/screens/Storescreen';
+import StoreScreen from './src/screens/StoreScreen';
 import QuestScreen from './src/screens/QuestScreen';
+import StartBattle from './src/screens/StartBattle';
 const App = () => {
   return (
     <SafeAreaView style={styles.container}>

@@ -1,19 +1,13 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
+import WelcomeHeader from '../components/WelcomeHeader';
 
 const WelcomeScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Image
-          style={styles.logo}
-          resizeMode="contain"
-          source={require('../assets/images/logo.png')}
-        />
-
-        <Text style={styles.logoName}>Bug Hunters</Text>
+        <WelcomeHeader />
       </View>
-
       <View style={styles.middle}>
         <Text style={styles.welcomeMessage}>
           {'Bem-vindo\n'}
@@ -43,27 +37,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   header: {
-    flex: 1,
     alignItems: 'center',
   },
   middle: {
     flex: 1,
+    top: '15%',
     alignItems: 'center',
   },
   bottom: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
-  logo: {
-    width: 270,
-    height: 135,
-  },
-  logoName: {
-    color: 'white',
-    fontSize: 32,
-    fontWeight: '700',
-  },
+
   welcomeMessage: {
     color: 'white',
     fontWeight: '400',
@@ -86,6 +71,7 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 10,
     width: '100%',
+    alignItems: 'center',
   },
   continueAdventureButton: {
     width: '100%',
@@ -96,13 +82,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 5,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonLabel: {
     fontWeight: '700',
     fontSize: 16,
     lineHeight: 24,
     color: 'white',
-    alignSelf: 'center',
   },
 });
 export default WelcomeScreen;

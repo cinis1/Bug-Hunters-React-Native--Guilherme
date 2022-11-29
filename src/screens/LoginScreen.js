@@ -7,6 +7,8 @@ import {
   TextInput,
 } from 'react-native';
 import React, {Component} from 'react';
+import GoBackButton from '../components/buttons/GoBackButton';
+import WelcomeHeader from '../components/WelcomeHeader';
 
 const LoginScreen = () => {
   return (

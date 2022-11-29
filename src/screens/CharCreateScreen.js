@@ -7,22 +7,11 @@ import {
   TextInput,
 } from 'react-native';
 import React from 'react';
-
+import Header from '../components/header';
 const CharCreateScreen = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <View>
-          <TouchableOpacity style={styles.goBackButton} />
-        </View>
-        <View style={styles.imageView}>
-          <Image
-            resizeMode="contain"
-            style={styles.logo}
-            source={require('../assets/images/logo.png')}
-          />
-        </View>
-      </View>
+      <Header />
       <View style={styles.charNameInput}>
         <Text style={styles.charInputMessage}>{'Criar\nPersonagem'}</Text>
         <TextInput

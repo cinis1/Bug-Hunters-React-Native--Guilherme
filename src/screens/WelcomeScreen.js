@@ -1,8 +1,10 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import WelcomeHeader from '../components/WelcomeHeader';
-
-const WelcomeScreen = () => {
+import MainButton from '../components/buttons/MainButton';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+const WelcomeScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -19,13 +21,20 @@ const WelcomeScreen = () => {
         </Text>
       </View>
       <View style={styles.bottom}>
-        <TouchableOpacity style={styles.newAdventureButton}>
-          <Text style={styles.buttonLabel}>Nova aventura</Text>
-        </TouchableOpacity>
+        <MainButton
+          type="primary"
+          label="Nova aventura"
+          navigation={navigation}
+          address="Create"
+        />
 
-        <TouchableOpacity style={styles.continueAdventureButton}>
-          <Text style={styles.buttonLabel}>Continuar aventura</Text>
-        </TouchableOpacity>
+        <MainButton
+          type="secondary"
+          label="Continuar aventura"
+          marginTop={10}
+          navigation={navigation}
+          address="Login"
+        />
       </View>
     </View>
   );
@@ -35,6 +44,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
+    backgroundColor: '#11081A',
   },
   header: {
     alignItems: 'center',
@@ -64,31 +74,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     marginTop: 10,
-  },
-  newAdventureButton: {
-    justifyContent: 'center',
-    backgroundColor: '#EC2127',
-    height: 48,
-    borderRadius: 10,
-    width: '100%',
-    alignItems: 'center',
-  },
-  continueAdventureButton: {
-    width: '100%',
-    backgroundColor: '#11081A',
-    height: 48,
-    borderRadius: 10,
-    borderColor: 'white',
-    borderWidth: 1,
-    marginTop: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonLabel: {
-    fontWeight: '700',
-    fontSize: 16,
-    lineHeight: 24,
-    color: 'white',
   },
 });
 export default WelcomeScreen;

@@ -1,9 +1,13 @@
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
 
 const GoBackButton = () => {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={styles.backButton}>
+    <TouchableOpacity
+      onPress={() => navigation.goBack()}
+      style={styles.backButton}>
       <Text>{'<'}</Text>
     </TouchableOpacity>
   );

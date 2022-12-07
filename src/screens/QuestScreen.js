@@ -1,8 +1,8 @@
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Header from '../components/header';
 import QuestBox from '../components/QuestBox';
-const QuestScreen = () => {
+const QuestScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Header />
@@ -10,9 +10,9 @@ const QuestScreen = () => {
         <Text style={styles.title}>Quests</Text>
       </View>
       <View style={styles.questBoard}>
-        <QuestBox />
-        <QuestBox />
-        <QuestBox />
+        <QuestBox navigation={navigation} address="Start" />
+        <QuestBox navigation={navigation} address="Start" />
+        <QuestBox navigation={navigation} address="Start" />
       </View>
     </View>
   );

@@ -29,14 +29,13 @@ const StatsDisplay = ({type}) => {
   };
   return (
     <View style={styles.statsBoxContent}>
-      <View style={styles.statAndNameBox}>
-        <Image
-          resizeMode="contain"
-          style={styles.statIcon}
-          source={types[type].img}
-        />
-        <Text style={styles.statName}>{types[type].label}</Text>
-      </View>
+      <Image
+        resizeMode="contain"
+        style={styles.statIcon}
+        source={types[type].img}
+      />
+      <Text style={styles.statName}>{types[type].label}</Text>
+
       <Text style={styles.statValue}>{types[type].value}</Text>
     </View>
   );
@@ -51,7 +50,7 @@ const styles = StyleSheet.create({
     borderColor: '#11081A',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+
     paddingHorizontal: 15,
   },
   statIcon: {
@@ -63,13 +62,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginLeft: 10,
     fontWeight: '600',
+    flex: 1,
   },
   statValue: {
     color: 'white',
     fontSize: 20,
-  },
-  statAndNameBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
 });

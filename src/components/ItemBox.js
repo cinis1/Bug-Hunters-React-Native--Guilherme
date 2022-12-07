@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#1E1725',
+    borderRadius: 10,
   },
   cartImage: {
     height: 20,

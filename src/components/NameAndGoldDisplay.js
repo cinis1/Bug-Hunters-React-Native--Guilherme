@@ -1,17 +1,14 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import goldImg from '../assets/images/coin.png';
+import GoldDisplay from './GoldDisplay';
 
-const NameAndGoldDisplay = () => {
+const NameAndGoldDisplay = ({message, type}) => {
   return (
     <View style={styles.infoBoxHeader}>
       <View style={styles.charNameView}>
-        <Text style={styles.charNameDisplay}>Caneta Azul</Text>
+        <Text style={styles.charNameDisplay}>{message}</Text>
       </View>
-      <View style={styles.goldDisplayBox}>
-        <Image resizeMode="contain" style={styles.goldIcon} source={goldImg} />
-        <Text style={styles.goldDisplay}>80</Text>
-      </View>
+      <GoldDisplay type={type} />
     </View>
   );
 };
@@ -40,7 +37,7 @@ const styles = StyleSheet.create({
     color: 'gold',
     marginLeft: 10,
   },
-  goldIcon: {
+  coinIcon: {
     height: 20,
     width: 20,
   },

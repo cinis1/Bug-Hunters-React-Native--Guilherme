@@ -6,7 +6,7 @@ import WelcomeScreen from './src/screens/WelcomeScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import CharCreateScreen from './src/screens/CharCreateScreen';
 import CharacterInformation from './src/screens/CharacterInformation';
-import Sla from './src/screens/Sla';
+
 import StoreScreen from './src/screens/StoreScreen';
 import QuestScreen from './src/screens/QuestScreen';
 import StartBattle from './src/screens/StartBattle';
@@ -22,6 +22,7 @@ const App = () => {
           <AuthStack.Screen name="Home" component={CharacterInformation} />
           <AuthStack.Screen name="Store" component={StoreScreen} />
           <AuthStack.Screen name="Quests" component={QuestScreen} />
+          <AuthStack.Screen name="Start" component={StartBattle} />
         </AuthStack.Navigator>
       </SafeAreaView>
     </NavigationContainer>

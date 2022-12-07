@@ -1,7 +1,8 @@
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
+import PlayButton from './buttons/PlayButton';
 
-const QuestBox = () => {
+const QuestBox = ({navigation, address}) => {
   return (
     <View style={styles.questBox}>
       <Text style={styles.questName}>Gehrman</Text>
@@ -14,9 +15,7 @@ const QuestBox = () => {
           />
           <Text style={styles.goldValue}>666</Text>
         </View>
-        <TouchableOpacity style={styles.playButton}>
-          <Text style={styles.playButtonLabel}>{'>'}</Text>
-        </TouchableOpacity>
+        <PlayButton navigation={navigation} address={address} />
       </View>
     </View>
   );
@@ -58,13 +57,5 @@ const styles = StyleSheet.create({
     color: 'gold',
     marginLeft: 10,
     fontWeight: '700',
-  },
-  playButton: {
-    backgroundColor: '#EC2127',
-    height: 50,
-    width: 50,
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });

@@ -1,26 +1,49 @@
-import {StyleSheet, Text, View, TextInput} from 'react-native';
-import React from 'react';
+import {StyleSheet, Text, View, FlatList} from 'react-native';
+import React, {useState, useEffect} from 'react';
 import Header from '../components/header';
 import MainButton from '../components/buttons/MainButton';
 import FactionButton from '../components/buttons/FactionButton';
+import Input from '../components/Input';
+import axios from 'axios';
+
 const CharCreateScreen = ({navigation}) => {
+  const [characterName, setCharacterName] = useState('');
+  const [selectedFaction, setSelectedFaction] = useState('');
+  const [factions, setFactions] = useState([]);
+
+  useEffect(() => {
+    getFactions();
+  }, []);
+
+  const getFactions = async () => {
+    const response = await axios.get(
+      'https://dws-bug-hunters-api.vercel.app/api/factions',
+    );
+    setFactions(response.data);
+  };
+  console.log(factions);
   return (
     <View style={styles.container}>
-      <Header />
-      <View style={styles.charNameInput}>
-        <Text style={styles.charInputMessage}>{'Criar\nPersonagem'}</Text>
-        <TextInput
-          placeholder="Nome do personagem"
-          style={styles.charInputBox}
-        />
+      <View style={styles.headerView}>
+        <Header />
+      </View>
+      <View style={styles.inputView}>
+        <Input message={'Criar\nPersonagem'} />
       </View>
       <View style={styles.factionSelect}>
         <Text style={styles.charInputMessage}>Facção</Text>
-        <View style={styles.factionSelectBox}>
-          <FactionButton type="frontend" />
-          <FactionButton type="mobile" />
-          <FactionButton type="backend" />
-        </View>
+        <FlatList
+          contentContainerStyle={styles.factionSelectBox}
+          data={factions}
+          horizontal
+          renderItem={({item}) => (
+            <FactionButton
+              onPress={() => setSelectedFaction(item.name)}
+              type={item.name}
+              isSelected={selectedFaction === item.name}
+            />
+          )}
+        />
       </View>
       <View style={styles.createCharButtonBox}>
         <MainButton label="Criar" navigation={navigation} address="Welcome" />
@@ -35,21 +58,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: '#11081A',
   },
-
-  charNameInput: {
-    borderWidth: 1,
-    borderColor: 'white',
+  headerView: {
+    height: 80,
   },
-  factionSelect: {
-    top: 10,
-  },
+  factionSelect: {},
   createCharButtonBox: {
     flex: 1,
     justifyContent: 'flex-end',
   },
-
-  imageView: {
-    paddingLeft: '25%',
+  inputView: {
+    margintop: 10,
+    marginBottom: 30,
   },
 
   charInputMessage: {
@@ -58,25 +77,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     paddingBottom: 30,
   },
-  charInputBox: {
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 5,
-    height: 48,
-    color: '#858585',
-    backgroundColor: '#D9D9D9',
-    alignContent: 'center',
-    paddingHorizontal: 10,
-  },
-  factionSelectMessage: {
-    color: 'white',
-    fontSize: 32,
-    fontWeight: '500',
-  },
+
   factionSelectBox: {
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: 'white',
+    width: '100%',
     justifyContent: 'space-between',
   },
 });

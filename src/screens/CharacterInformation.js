@@ -1,5 +1,5 @@
 import {StyleSheet, View} from 'react-native';
-import React, {Component} from 'react';
+import React from 'react';
 import Header from '../components/header';
 import ScreenButton from '../components/buttons/ScreenButton';
 import StatsDisplay from '../components/Statsdisplay';
@@ -10,7 +10,7 @@ const CharacterInformation = ({navigation}) => {
     <View style={styles.container}>
       <Header />
       <View style={styles.charInfoBox}>
-        <NameAndGoldDisplay />
+        <NameAndGoldDisplay message={'Caneta Azul'} type={'coin'} />
         <View style={styles.statsBox}>
           <StatsDisplay type="hp" />
           <StatsDisplay type="atk" />

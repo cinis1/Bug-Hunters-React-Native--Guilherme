@@ -10,24 +10,16 @@ import React from 'react';
 import Header from '../components/header';
 import ItemBox from '../components/ItemBox';
 import FilterOption from '../components/FilterOption';
+import NameAndGoldDisplay from '../components/NameAndGoldDisplay';
 
 const StoreScreen = () => {
   return (
     <View style={styles.container}>
       <Header />
       <View style={styles.infoBoxHeader}>
-        <Text style={styles.titleDisplay}>Loja</Text>
-
-        <View style={styles.goldDisplayBox}>
-          <Image
-            resizeMode="contain"
-            style={styles.goldIcon}
-            source={require('../assets/images/coin.png')}
-          />
-          <Text style={styles.goldDisplay}>80</Text>
-        </View>
+        <NameAndGoldDisplay message={'Loja'} type="coin" />
       </View>
-      <ScrollView horizontal contentContainerStyle={styles.filterBox}>
+      <ScrollView horizontal style={styles.filterBox}>
         <FilterOption label={'Todos'} />
         <FilterOption label={'Ataque'} />
         <FilterOption label={'Defesa'} />
@@ -53,15 +45,10 @@ const styles = StyleSheet.create({
   },
 
   filterBox: {
-    flexGrow: 1,
-    height: 70,
-    borderWidth: 1,
-    borderColor: 'white',
+    maxHeight: 30,
   },
   itemList: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: 'white',
+    marginTop: 30,
   },
 
   goldDisplayBox: {
@@ -79,9 +66,8 @@ const styles = StyleSheet.create({
     width: 20,
   },
   infoBoxHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20,
+    width: '100%',
+    marginBottom: 0,
   },
   titleDisplay: {
     color: 'white',

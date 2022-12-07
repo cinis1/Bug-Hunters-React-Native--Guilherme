@@ -1,8 +1,10 @@
-import {Text, StyleSheet, View, TextInput} from 'react-native';
-import React, {Component} from 'react';
+import {StyleSheet, View} from 'react-native';
+import React from 'react';
 import WelcomeHeader from '../components/WelcomeHeader';
 import GoBackButton from '../components/buttons/GoBackButton';
 import MainButton from '../components/buttons/MainButton';
+import Input from '../components/Input';
+
 const LoginScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
@@ -12,14 +14,10 @@ const LoginScreen = ({navigation}) => {
       <View>
         <WelcomeHeader />
       </View>
-      <View style={styles.inputBox}>
-        <Text style={styles.charInputMessage}>{'Entrar'}</Text>
-        <TextInput
-          placeholder="Nome do personagem"
-          style={styles.charInputBox}
-        />
-      </View>
-      <View style={styles.createCharButtonBox}>
+      <View style={styles.inputBox} />
+      <Input message={'Entrar'} />
+
+      <View style={styles.loginButtonBox}>
         <MainButton
           type="primary"
           label="Entrar"
@@ -40,12 +38,8 @@ const styles = StyleSheet.create({
   header: {
     height: 50,
   },
-  logoBox: {
-    flex: 10,
-    alignItems: 'center',
-  },
+
   inputBox: {
-    flex: 20,
     marginTop: 40,
   },
   loginButtonBox: {
@@ -59,16 +53,6 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: '700',
     paddingBottom: 30,
-  },
-  charInputBox: {
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 5,
-    height: 40,
-    color: '#858585',
-    backgroundColor: '#D9D9D9',
-    alignContent: 'center',
-    paddingHorizontal: 10,
   },
 });
 export default LoginScreen;

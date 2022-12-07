@@ -1,19 +1,15 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
-
-export default function WelcomeScreen() {
+import WelcomeHeader from '../components/WelcomeHeader';
+import MainButton from '../components/buttons/MainButton';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+const WelcomeScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Image
-          style={styles.logo}
-          resizeMode="contain"
-          source={require('../assets/images/logo.png')}
-        />
-
-        <Text style={styles.logoName}>Bug Hunters</Text>
+        <WelcomeHeader />
       </View>
-
       <View style={styles.middle}>
         <Text style={styles.welcomeMessage}>
           {'Bem-vindo\n'}
@@ -25,45 +21,44 @@ export default function WelcomeScreen() {
         </Text>
       </View>
       <View style={styles.bottom}>
-        <TouchableOpacity style={styles.newAdventureButton}>
-          <Text style={styles.buttonLabel}>Nova aventura</Text>
-        </TouchableOpacity>
+        <MainButton
+          type="primary"
+          label="Nova aventura"
+          navigation={navigation}
+          address="Create"
+        />
 
-        <TouchableOpacity style={styles.continueAdventureButton}>
-          <Text style={styles.buttonLabel}>Continuar aventura</Text>
-        </TouchableOpacity>
+        <MainButton
+          type="secondary"
+          label="Continuar aventura"
+          marginTop={10}
+          navigation={navigation}
+          address="Login"
+        />
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
+    backgroundColor: '#11081A',
   },
   header: {
-    flex: 1,
     alignItems: 'center',
   },
   middle: {
     flex: 1,
+    top: '15%',
     alignItems: 'center',
   },
   bottom: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
-  logo: {
-    width: 270,
-    height: 135,
-  },
-  logoName: {
-    color: 'white',
-    fontSize: 32,
-    fontWeight: '700',
-  },
+
   welcomeMessage: {
     color: 'white',
     fontWeight: '400',
@@ -80,28 +75,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 10,
   },
-  newAdventureButton: {
-    justifyContent: 'center',
-    backgroundColor: '#EC2127',
-    height: 48,
-    borderRadius: 10,
-    width: '100%',
-  },
-  continueAdventureButton: {
-    width: '100%',
-    backgroundColor: '#11081A',
-    height: 48,
-    borderRadius: 10,
-    borderColor: 'white',
-    borderWidth: 1,
-    marginTop: 5,
-    justifyContent: 'center',
-  },
-  buttonLabel: {
-    fontWeight: '700',
-    fontSize: 16,
-    lineHeight: 24,
-    color: 'white',
-    alignSelf: 'center',
-  },
 });
+export default WelcomeScreen;

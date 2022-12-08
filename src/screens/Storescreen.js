@@ -1,13 +1,6 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-} from 'react-native';
+import {StyleSheet, View, ScrollView} from 'react-native';
 import React from 'react';
-import Header from '../components/header';
+import Header from '../components/Header';
 import ItemBox from '../components/ItemBox';
 import FilterOption from '../components/FilterOption';
 import NameAndGoldDisplay from '../components/NameAndGoldDisplay';

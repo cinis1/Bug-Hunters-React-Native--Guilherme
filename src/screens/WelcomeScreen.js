@@ -5,6 +5,10 @@ import MainButton from '../components/buttons/MainButton';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const WelcomeScreen = ({navigation}) => {
+  const navigateToCreateChar = () => {
+    navigation.navigate('Create');
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -25,7 +29,7 @@ const WelcomeScreen = ({navigation}) => {
           type="primary"
           label="Nova aventura"
           navigation={navigation}
-          address="Create"
+          onPress={navigateToCreateChar}
         />
 
         <MainButton

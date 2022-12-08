@@ -1,6 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const GoBackButton = () => {
   const navigation = useNavigation();
@@ -8,7 +9,7 @@ const GoBackButton = () => {
     <TouchableOpacity
       onPress={() => navigation.goBack()}
       style={styles.backButton}>
-      <Text>{'<'}</Text>
+      <Icon name="arrow-left" size={25} color={'white'} />
     </TouchableOpacity>
   );
 };

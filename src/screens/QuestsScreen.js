@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import QuestBox from '../components/QuestBox';
 import axios from 'axios';
 
-const QuestScreen = ({navigation}) => {
+const QuestsScreen = ({navigation}) => {
   const [quests, setQuests] = useState([]);
   useEffect(() => {
     getQuests();
@@ -38,7 +38,7 @@ const QuestScreen = ({navigation}) => {
   );
 };
 
-export default QuestScreen;
+export default QuestsScreen;
 
 const styles = StyleSheet.create({
   container: {

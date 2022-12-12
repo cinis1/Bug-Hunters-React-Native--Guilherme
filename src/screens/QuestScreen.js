@@ -1,19 +1,39 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {StyleSheet, Text, View, FlatList} from 'react-native';
+import React, {useState, useEffect} from 'react';
 import Header from '../components/Header';
 import QuestBox from '../components/QuestBox';
+import axios from 'axios';
+
 const QuestScreen = ({navigation}) => {
+  const [quests, setQuests] = useState([]);
+  useEffect(() => {
+    getQuests();
+  }, []);
+
+  const getQuests = async () => {
+    const response = await axios.get(
+      'https://dws-bug-hunters-api.vercel.app/api/tasks',
+    );
+    setQuests(response.data);
+  };
   return (
     <View style={styles.container}>
       <Header />
       <View style={styles.titleView}>
         <Text style={styles.title}>Quests</Text>
       </View>
-      <View style={styles.questBoard}>
-        <QuestBox navigation={navigation} address="Start" />
-        <QuestBox navigation={navigation} address="Start" />
-        <QuestBox navigation={navigation} address="Start" />
-      </View>
+      <FlatList
+        contentContainerStyle={styles.questBoard}
+        data={quests}
+        extraData={quests}
+        renderItem={({item}) => (
+          <QuestBox
+            navigation={navigation}
+            name={item.name}
+            reward={item.reward}
+          />
+        )}
+      />
     </View>
   );
 };
@@ -38,5 +58,6 @@ const styles = StyleSheet.create({
   },
   questBoard: {
     flex: 1,
+    paddingBottom: 20,
   },
 });

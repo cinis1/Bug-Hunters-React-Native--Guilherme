@@ -1,21 +1,22 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
 import PlayButton from './buttons/PlayButton';
+import goldImage from '../assets/images/gold.png';
 
-const QuestBox = ({navigation, address}) => {
+const QuestBox = ({navigation, name, reward}) => {
   return (
     <View style={styles.questBox}>
-      <Text style={styles.questName}>Gehrman</Text>
+      <Text style={styles.questName}>{name}</Text>
       <View style={styles.contentBox}>
         <View style={styles.goldBox}>
           <Image
             resizeMode="contain"
             style={styles.goldIcon}
-            source={require('../assets/images/gold.png')}
+            source={goldImage}
           />
-          <Text style={styles.goldValue}>666</Text>
+          <Text style={styles.goldValue}>{reward}</Text>
         </View>
-        <PlayButton navigation={navigation} address={address} />
+        <PlayButton navigation={navigation} />
       </View>
     </View>
   );

@@ -1,12 +1,12 @@
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-
-const PlayButton = ({navigation, address}) => {
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+const PlayButton = ({navigation}) => {
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate(`${address}`)}
+      onPress={() => navigation.navigate('Start')}
       style={styles.playButton}>
-      <Text style={styles.playButtonLabel}>{'>'}</Text>
+      <Icon name="play" size={30} color={'white'} />
     </TouchableOpacity>
   );
 };

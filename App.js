@@ -5,11 +5,12 @@ import React from 'react';
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import CharCreateScreen from './src/screens/CharCreateScreen';
-import CharacterInformation from './src/screens/CharacterInformation';
+import CharacterInformation from './src/screens/HomeScreen';
 
 import StoreScreen from './src/screens/StoreScreen';
 import QuestScreen from './src/screens/QuestScreen';
 import StartBattle from './src/screens/StartBattle';
+import HomeScreen from './src/screens/HomeScreen';
 const AuthStack = createNativeStackNavigator();
 const App = () => {
   return (
@@ -19,7 +20,7 @@ const App = () => {
           <AuthStack.Screen name="Welcome" component={WelcomeScreen} />
           <AuthStack.Screen name="Create" component={CharCreateScreen} />
           <AuthStack.Screen name="Login" component={LoginScreen} />
-          <AuthStack.Screen name="Home" component={CharacterInformation} />
+          <AuthStack.Screen name="Home" component={HomeScreen} />
           <AuthStack.Screen name="Store" component={StoreScreen} />
           <AuthStack.Screen name="Quests" component={QuestScreen} />
           <AuthStack.Screen name="Start" component={StartBattle} />

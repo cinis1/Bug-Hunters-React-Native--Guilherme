@@ -1,11 +1,25 @@
-import {StyleSheet, View, ScrollView} from 'react-native';
-import React from 'react';
+import {StyleSheet, View, ScrollView, FlatList} from 'react-native';
+import React, {useState, useEffect} from 'react';
 import Header from '../components/Header';
 import ItemBox from '../components/ItemBox';
 import FilterOption from '../components/FilterOption';
 import NameAndGoldDisplay from '../components/NameAndGoldDisplay';
+import axios from 'axios';
 
 const StoreScreen = () => {
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    getItems();
+  }, []);
+
+  console.log(items);
+  const getItems = async () => {
+    const response = await axios.get(
+      'https://dws-bug-hunters-api.vercel.app/api/equipment',
+    );
+    setItems(response.data);
+  };
+
   return (
     <View style={styles.container}>
       <Header />
@@ -19,11 +33,18 @@ const StoreScreen = () => {
         <FilterOption label={'Vida'} />
         <FilterOption label={'Agilidade'} />
       </ScrollView>
-      <View style={styles.itemList}>
-        <ItemBox />
-        <ItemBox />
-        <ItemBox />
-      </View>
+      <FlatList
+        contentContainerStyle={styles.itemList}
+        data={items}
+        extraData={items}
+        renderItem={({item}) => (
+          <ItemBox
+            stat={item.affected_attribute}
+            statValue={item.affected_amount}
+            name={item.name}
+          />
+        )}
+      />
     </View>
   );
 };
@@ -42,22 +63,14 @@ const styles = StyleSheet.create({
   },
   itemList: {
     marginTop: 30,
+    paddingBottom: 20,
   },
 
   goldDisplayBox: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  goldDisplay: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: 'gold',
-    marginLeft: 10,
-  },
-  goldIcon: {
-    height: 20,
-    width: 20,
-  },
+
   infoBoxHeader: {
     width: '100%',
     marginBottom: 0,

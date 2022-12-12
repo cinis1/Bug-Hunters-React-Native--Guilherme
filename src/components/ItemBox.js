@@ -1,25 +1,39 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import atkIcon from '../assets/images/icon-sword.png';
+import defIcon from '../assets/images/icon-shield.png';
+import hpIcon from '../assets/images/icon-heart.png';
 
-const ItemBox = () => {
+const stats = {
+  atk: {
+    icon: atkIcon,
+  },
+  def: {
+    icon: defIcon,
+  },
+  hp: {
+    icon: hpIcon,
+  },
+  agi: {
+    icon: atkIcon,
+  },
+};
+const ItemBox = ({stat, statValue, name}) => {
   return (
     <View style={styles.itemBox}>
       <View style={styles.statBox}>
         <Image
           resizeMode="contain"
           style={styles.statIcon}
-          source={require('../assets/images/icon-sword.png')}
+          source={stats[stat].icon}
         />
-        <Text style={styles.statValue}>+80</Text>
+        <Text style={styles.statValue}>+{statValue}</Text>
       </View>
       <View style={styles.rightHalfBox}>
-        <Text style={styles.itemName}>Moonlight Greatsword</Text>
+        <Text style={styles.itemName}>{name}</Text>
         <TouchableOpacity style={styles.buyButton}>
-          <Image
-            resizeMode="contain"
-            style={styles.cartImage}
-            source={require('../assets/images/coin.png')}
-          />
+          <Icon name="cart" size={16} color={'#8F00FF'} />
         </TouchableOpacity>
       </View>
     </View>
@@ -65,9 +79,11 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   itemName: {
-    fontSize: 12,
+    flex: 1,
+    fontSize: 16,
     fontWeight: '400',
     color: 'white',
+    flexWrap: 'wrap',
   },
   buyButton: {
     height: 30,

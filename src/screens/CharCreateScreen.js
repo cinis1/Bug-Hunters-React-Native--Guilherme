@@ -76,11 +76,8 @@ const CharCreateScreen = ({navigation}) => {
       </View>
       <View style={styles.createCharButtonBox}>
         <MainButton
-          name={characterName}
-          factions={selectedFaction}
           label="Criar"
           navigation={navigation}
-          address="Welcome"
           onPress={postCharacter}
         />
       </View>

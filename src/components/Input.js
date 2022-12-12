@@ -11,6 +11,8 @@ const Input = ({
     <>
       <Text style={styles.charInputMessage}>{message}</Text>
       <TextInput
+        autoCorrect={false}
+        autoCapitalize={'none'}
         placeholder={placeholder}
         style={styles.charInputBox}
         onChangeText={newText => setName(newText)}

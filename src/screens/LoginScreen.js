@@ -14,7 +14,7 @@ const LoginScreen = ({navigation}) => {
       'https://dws-bug-hunters-api.vercel.app/api/characters',
     );
     const character = response.data.find(item => item.name === characterName);
-    console.log(character);
+
     if (character === null || character === undefined) {
       console.log('Character not found');
     } else {

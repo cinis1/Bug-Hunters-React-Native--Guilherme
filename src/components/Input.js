@@ -1,11 +1,21 @@
 import {StyleSheet, Text, TextInput} from 'react-native';
 import React from 'react';
 
-const Input = ({message, placeholder = 'Nome do personagem'}) => {
+const Input = ({
+  message,
+  placeholder = 'Nome do personagem',
+  name,
+  setName,
+}) => {
   return (
     <>
       <Text style={styles.charInputMessage}>{message}</Text>
-      <TextInput placeholder={placeholder} style={styles.charInputBox} />
+      <TextInput
+        placeholder={placeholder}
+        style={styles.charInputBox}
+        onChangeText={newText => setName(newText)}
+        defaultValue={name}
+      />
     </>
   );
 };

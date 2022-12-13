@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import Header from '../components/header';
+import Header from '../components/Header';
 import QuestBox from '../components/QuestBox';
 const QuestScreen = ({navigation}) => {
   return (

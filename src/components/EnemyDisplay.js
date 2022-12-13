@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
 
-const EnemyDisplay = () => {
+const EnemyDisplay = ({name}) => {
   return (
     <View style={styles.enemyBox}>
       <Image
@@ -10,7 +10,7 @@ const EnemyDisplay = () => {
         source={require('../assets/images/bug.png')}
       />
       <View style={styles.enemyNameBox}>
-        <Text style={styles.enemyName}>Gehrman</Text>
+        <Text style={styles.enemyName}>{name}</Text>
       </View>
     </View>
   );

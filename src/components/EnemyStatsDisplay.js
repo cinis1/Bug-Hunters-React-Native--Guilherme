@@ -1,42 +1,56 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, FlatList} from 'react-native';
 import React from 'react';
+import atkIcon from '../assets/images/icon-sword.png';
+import defIcon from '../assets/images/icon-shield.png';
+import hpIcon from '../assets/images/icon-heart.png';
 
-const EnemyStatsDisplay = () => {
+const EnemyStatsDisplay = ({enemy}) => {
+  const addEquipmentStats = char => {
+    const stats = Object.assign({}, char);
+    stats.equipment.forEach(
+      equipment =>
+        (stats[equipment.affected_attribute] += equipment.affected_amount),
+    );
+    return stats;
+  };
+  const enemyInfo = addEquipmentStats(enemy);
+  console.warn(enemy);
+  // const enemyStats = [
+  //   {
+  //     img: atkIcon,
+  //     value: enemyInfo.atk,
+  //   },
+  //   {
+  //     img: defIcon,
+  //     value: enemyInfo.def,
+  //   },
+  //   {
+  //     img: hpIcon,
+  //     value: enemyInfo.hp,
+  //   },
+  //   {
+  //     img: atkIcon,
+  //     value: enemyInfo.agi,
+  //   },
+  // ];
+  console.log({enemy});
   return (
-    <View style={styles.enemyStatsBox}>
-      <View style={styles.statBox}>
-        <Image
-          resizeMode="contain"
-          style={styles.statIcon}
-          source={require('../assets/images/icon-sword.png')}
-        />
-        <Text style={styles.statValue}>50</Text>
-      </View>
-      <View style={styles.statBox}>
-        <Image
-          resizeMode="contain"
-          style={styles.statIcon}
-          source={require('../assets/images/icon-shield.png')}
-        />
-        <Text style={styles.statValue}>50</Text>
-      </View>
-      <View style={styles.statBox}>
-        <Image
-          resizeMode="contain"
-          style={styles.statIcon}
-          source={require('../assets/images/icon-heart.png')}
-        />
-        <Text style={styles.statValue}>50</Text>
-      </View>
-      <View style={styles.statBox}>
-        <Image
-          resizeMode="contain"
-          style={styles.statIcon}
-          source={require('../assets/images/icon-sword.png')}
-        />
-        <Text style={styles.statValue}>50</Text>
-      </View>
-    </View>
+    <View />
+    // <FlatList
+    //   contentContainerStyle={styles.enemyStatsBox}
+    //   data={enemyStats}
+    //   horizontal
+    //   renderItem={({item}) => (
+    //     <View style={styles.statBox}>
+    //       <Image
+    //         resizeMode="contain"
+    //         style={styles.statIcon}
+    //         source={item.img}
+    //       />
+    //       <Text style={styles.statValue}>{item.value}</Text>
+    //     </View>
+    //   )}
+    // />
   );
 };
 
@@ -44,14 +58,10 @@ export default EnemyStatsDisplay;
 
 const styles = StyleSheet.create({
   statBox: {
-    flex: 1,
     height: 50,
     width: 50,
-
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 20,
-    marginRight: 10,
   },
   statIcon: {
     height: 50,
@@ -63,7 +73,9 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   enemyStatsBox: {
-    flexDirection: 'row',
-    marginTop: 20,
+    width: '100%',
+    marginTop: 40,
+    paddingHorizontal: 20,
+    justifyContent: 'space-between',
   },
 });

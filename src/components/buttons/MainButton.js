@@ -2,16 +2,15 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 
 const MainButton = ({
-  navigation,
-  address,
   type = 'primary',
   label,
   marginTop = 0,
   marginBottom = 0,
+  onPress,
 }) => {
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate(`${address}`)}
+      onPress={onPress}
       style={[
         styles.mainButton,
         {

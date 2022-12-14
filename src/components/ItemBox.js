@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import atkIcon from '../assets/images/icon-sword.png';
 import defIcon from '../assets/images/icon-shield.png';
 import hpIcon from '../assets/images/icon-heart.png';
+import BuyButton from './buttons/BuyButton';
 
 const stats = {
   atk: {
@@ -19,22 +20,22 @@ const stats = {
     icon: atkIcon,
   },
 };
-const ItemBox = ({stat, statValue, name}) => {
+const ItemBox = ({item}) => {
   return (
     <View style={styles.itemBox}>
       <View style={styles.statBox}>
         <Image
           resizeMode="contain"
           style={styles.statIcon}
-          source={stats[stat].icon}
+          source={stats[item.affected_attribute].icon}
         />
-        <Text style={styles.statValue}>+{statValue}</Text>
+        <Text style={styles.statValue}>+{item.affected_amount}</Text>
       </View>
       <View style={styles.rightHalfBox}>
-        <Text style={styles.itemName}>{name}</Text>
-        <TouchableOpacity style={styles.buyButton}>
-          <Icon name="cart" size={16} color={'#8F00FF'} />
-        </TouchableOpacity>
+        <Text numberOfLines={1} style={styles.itemName}>
+          {item.name}
+        </Text>
+        <BuyButton item={item} />
       </View>
     </View>
   );
@@ -84,17 +85,5 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: 'white',
     flexWrap: 'wrap',
-  },
-  buyButton: {
-    height: 30,
-    width: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#1E1725',
-    borderRadius: 10,
-  },
-  cartImage: {
-    height: 20,
-    width: 20,
   },
 });

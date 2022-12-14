@@ -37,13 +37,7 @@ const StoreScreen = () => {
         contentContainerStyle={styles.itemList}
         data={items}
         extraData={items}
-        renderItem={({item}) => (
-          <ItemBox
-            stat={item.affected_attribute}
-            statValue={item.affected_amount}
-            name={item.name}
-          />
-        )}
+        renderItem={({item}) => <ItemBox item={item} />}
       />
     </View>
   );

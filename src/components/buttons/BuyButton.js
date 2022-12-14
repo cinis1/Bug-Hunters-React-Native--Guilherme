@@ -1,10 +1,27 @@
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {Alert, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const BuyButton = ({item}) => {
+  const confirmPurchase = () => {
+    Alert.alert(
+      'Confirm purchase',
+      `buy ${item.name} for ${item.value} gold?`,
+      [
+        {
+          text: 'buy',
+          onPress: () => console.log(`${item.name} purchased`),
+        },
+        {
+          text: 'cancel',
+          onPress: () => console.log('Purchase canceled'),
+        },
+      ],
+    );
+  };
+
   return (
-    <TouchableOpacity style={styles.buyButton}>
+    <TouchableOpacity onPress={confirmPurchase} style={styles.buyButton}>
       <Icon name="cart" size={16} color={'#8F00FF'} />
     </TouchableOpacity>
   );

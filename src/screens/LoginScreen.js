@@ -1,11 +1,27 @@
 import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import WelcomeHeader from '../components/WelcomeHeader';
 import GoBackButton from '../components/buttons/GoBackButton';
 import MainButton from '../components/buttons/MainButton';
 import Input from '../components/Input';
+import axios from 'axios';
 
 const LoginScreen = ({navigation}) => {
+  const [characterName, setCharacterName] = useState('');
+
+  const authentication = async () => {
+    const response = await axios.get(
+      'https://dws-bug-hunters-api.vercel.app/api/characters',
+    );
+    const character = response.data.find(item => item.name === characterName);
+
+    if (character === null || character === undefined) {
+      console.log('Character not found');
+    } else {
+      navigation.navigate('Home');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -15,14 +31,17 @@ const LoginScreen = ({navigation}) => {
         <WelcomeHeader />
       </View>
       <View style={styles.inputBox} />
-      <Input message={'Entrar'} />
+      <Input
+        message={'Entrar'}
+        name={characterName}
+        setName={setCharacterName}
+      />
 
       <View style={styles.loginButtonBox}>
         <MainButton
-          type="primary"
           label="Entrar"
           navigation={navigation}
-          address="Home"
+          onPress={authentication}
         />
       </View>
     </View>

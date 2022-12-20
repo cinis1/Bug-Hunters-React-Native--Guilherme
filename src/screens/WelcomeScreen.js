@@ -8,6 +8,9 @@ const WelcomeScreen = ({navigation}) => {
   const navigateToCreateChar = () => {
     navigation.navigate('Create');
   };
+  const navigateToLogin = () => {
+    navigation.navigate('Login');
+  };
 
   return (
     <View style={styles.container}>
@@ -37,7 +40,7 @@ const WelcomeScreen = ({navigation}) => {
           label="Continuar aventura"
           marginTop={10}
           navigation={navigation}
-          address="Login"
+          onPress={navigateToLogin}
         />
       </View>
     </View>

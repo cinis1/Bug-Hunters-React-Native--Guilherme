@@ -17,7 +17,7 @@ const types = {
   },
 };
 
-const GoldDisplay = ({type, value}) => {
+const GoldDisplay = ({type, goldValue}) => {
   return (
     <View style={styles.goldDisplayBox}>
       <Image
@@ -25,7 +25,7 @@ const GoldDisplay = ({type, value}) => {
         style={[{height: types[type].height, width: types[type].width}]}
         source={types[type].icon}
       />
-      <Text style={styles.goldDisplay}>{value}</Text>
+      <Text style={styles.goldDisplay}>{goldValue}</Text>
     </View>
   );
 };

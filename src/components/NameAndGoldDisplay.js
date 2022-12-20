@@ -2,13 +2,13 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import GoldDisplay from './GoldDisplay';
 
-const NameAndGoldDisplay = ({message, type}) => {
+const NameAndGoldDisplay = ({message, type, goldValue}) => {
   return (
     <View style={styles.infoBoxHeader}>
       <View style={styles.charNameView}>
         <Text style={styles.charNameDisplay}>{message}</Text>
       </View>
-      <GoldDisplay type={type} />
+      <GoldDisplay type={type} goldValue={goldValue} />
     </View>
   );
 };

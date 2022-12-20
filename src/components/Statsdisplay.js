@@ -4,27 +4,23 @@ import swordImg from '../assets/images/icon-sword.png';
 import shieldImg from '../assets/images/icon-shield.png';
 import hpImg from '../assets/images/icon-heart.png';
 
-const StatsDisplay = ({type}) => {
+const StatsDisplay = ({type, value}) => {
   const types = {
     atk: {
       label: 'Ataque',
       img: swordImg,
-      value: 80,
     },
     def: {
       label: 'Defesa',
       img: shieldImg,
-      value: 80,
     },
     hp: {
       label: 'Vida',
       img: hpImg,
-      value: 80,
     },
     agi: {
       label: 'Agilidade',
       img: swordImg,
-      value: 80,
     },
   };
   return (
@@ -36,7 +32,7 @@ const StatsDisplay = ({type}) => {
       />
       <Text style={styles.statName}>{types[type].label}</Text>
 
-      <Text style={styles.statValue}>{types[type].value}</Text>
+      <Text style={styles.statValue}>{value}</Text>
     </View>
   );
 };

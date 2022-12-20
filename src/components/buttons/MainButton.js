@@ -1,4 +1,9 @@
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 
 const MainButton = ({
@@ -7,6 +12,7 @@ const MainButton = ({
   marginTop = 0,
   marginBottom = 0,
   onPress,
+  isLoading,
 }) => {
   return (
     <TouchableOpacity
@@ -15,12 +21,16 @@ const MainButton = ({
         styles.mainButton,
         {
           backgroundColor: type === 'primary' ? '#EC2127' : '#11081A',
-          borderColor: type === 'primary' ? '#EC2127' : '#11081A',
+          borderColor: type === 'primary' ? '#EC2127' : 'white',
           marginTop: marginTop,
           marginBottom: marginBottom,
         },
       ]}>
-      <Text style={styles.mainLabel}>{label}</Text>
+      {isLoading ? (
+        <ActivityIndicator animating />
+      ) : (
+        <Text style={styles.mainLabel}>{label}</Text>
+      )}
     </TouchableOpacity>
   );
 };
@@ -34,7 +44,6 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 10,
     borderWidth: 1,
-    marginTop: 5,
     justifyContent: 'center',
   },
   mainLabel: {

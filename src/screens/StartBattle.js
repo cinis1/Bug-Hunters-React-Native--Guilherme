@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, SafeAreaView} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Header from '../components/Header';
 import EnemyStatsDisplay from '../components/EnemyStatsDisplay';
@@ -22,27 +22,32 @@ const StartBattle = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Header />
-      <EnemyDisplay name={bugs.name} />
-      <EnemyStatsDisplay enemy={bugs} />
-      <View style={styles.bottomView}>
-        <View style={styles.goldBox}>
-          <GoldDisplay type={'gold'} />
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <Header />
+        <EnemyDisplay name={bugs.name} />
+        <EnemyStatsDisplay enemy={bugs} />
+        <View style={styles.bottomView}>
+          <View style={styles.goldBox}>
+            <GoldDisplay type={'gold'} />
+          </View>
+          <MainButton label={'Lutar'} />
         </View>
-        <MainButton label={'Lutar'} />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 export default StartBattle;
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#11081A',
+  },
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    backgroundColor: '#11081A',
   },
 
   bottomView: {

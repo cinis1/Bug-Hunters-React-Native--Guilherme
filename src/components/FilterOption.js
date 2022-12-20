@@ -1,10 +1,33 @@
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-const FilterOption = ({label}) => {
+const types = {
+  all: {
+    name: 'Todos',
+    stat: 'all',
+  },
+  atk: {
+    name: 'Ataque',
+    stat: 'atk',
+  },
+  def: {
+    name: 'Defesa',
+    stat: 'def',
+  },
+  hp: {
+    name: 'Vida',
+    stat: 'hp',
+  },
+  agi: {
+    name: 'Agilidade',
+    stat: 'agi',
+  },
+};
+
+const FilterOption = ({type, onPress}) => {
   return (
-    <TouchableOpacity style={styles.filterOption}>
-      <Text style={styles.filterLabel}>{label}</Text>
+    <TouchableOpacity style={styles.filterOption} onPress={onPress}>
+      <Text style={styles.filterLabel}>{types[type].name}</Text>
     </TouchableOpacity>
   );
 };

@@ -1,9 +1,8 @@
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
 import React from 'react';
 import WelcomeHeader from '../components/WelcomeHeader';
 import MainButton from '../components/buttons/MainButton';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
 const WelcomeScreen = ({navigation}) => {
   const navigateToCreateChar = () => {
     navigation.navigate('Create');
@@ -13,45 +12,50 @@ const WelcomeScreen = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <WelcomeHeader />
-      </View>
-      <View style={styles.middle}>
-        <Text style={styles.welcomeMessage}>
-          {'Bem-vindo\n'}
-          <Text style={styles.welcomeMessageFragment}>Caçador!</Text>
-        </Text>
-        <Text style={styles.appDescription}>
-          Enfrete os bugs mais assustadores que você conseguir encontrar e ganhe
-          as melhores recompensas!
-        </Text>
-      </View>
-      <View style={styles.bottom}>
-        <MainButton
-          type="primary"
-          label="Nova aventura"
-          navigation={navigation}
-          onPress={navigateToCreateChar}
-        />
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <WelcomeHeader />
+        </View>
+        <View style={styles.middle}>
+          <Text style={styles.welcomeMessage}>
+            {'Bem-vindo\n'}
+            <Text style={styles.welcomeMessageFragment}>Caçador!</Text>
+          </Text>
+          <Text style={styles.appDescription}>
+            Enfrete os bugs mais assustadores que você conseguir encontrar e
+            ganhe as melhores recompensas!
+          </Text>
+        </View>
+        <View style={styles.bottom}>
+          <MainButton
+            type="primary"
+            label="Nova aventura"
+            navigation={navigation}
+            onPress={navigateToCreateChar}
+          />
 
-        <MainButton
-          type="secondary"
-          label="Continuar aventura"
-          marginTop={10}
-          navigation={navigation}
-          onPress={navigateToLogin}
-        />
+          <MainButton
+            type="secondary"
+            label="Continuar aventura"
+            marginTop={10}
+            navigation={navigation}
+            onPress={navigateToLogin}
+          />
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#11081A',
+  },
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    backgroundColor: '#11081A',
   },
   header: {
     alignItems: 'center',

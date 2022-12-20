@@ -22,7 +22,7 @@ const CharCreateScreen = ({navigation}) => {
     setFactions(response.data);
   };
   const postCharacter = async () => {
-    if (characterName && selectedFaction) {
+    if (characterName && selectedFaction && characterName.length >= 3) {
       const char = {
         atk: 10,
         def: 10,

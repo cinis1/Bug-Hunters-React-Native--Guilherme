@@ -1,14 +1,15 @@
 import {StyleSheet, View} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import WelcomeHeader from '../components/WelcomeHeader';
 import GoBackButton from '../components/buttons/GoBackButton';
 import MainButton from '../components/buttons/MainButton';
 import Input from '../components/Input';
 import axios from 'axios';
+import {AuthContext} from '../contexts/AuthContext';
 
 const LoginScreen = ({navigation}) => {
   const [characterName, setCharacterName] = useState('');
-
+  const {setChar} = useContext(AuthContext);
   const authentication = async () => {
     const response = await axios.get(
       'https://dws-bug-hunters-api.vercel.app/api/characters',
@@ -18,6 +19,7 @@ const LoginScreen = ({navigation}) => {
     if (character === null || character === undefined) {
       console.log('Character not found');
     } else {
+      setChar(character);
       navigation.navigate('Home');
     }
   };

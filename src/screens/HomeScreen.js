@@ -1,23 +1,15 @@
 import {StyleSheet, View} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Header from '../components/Header';
 import ScreenButton from '../components/buttons/ScreenButton';
 import StatsDisplay from '../components/Statsdisplay';
 import NameAndGoldDisplay from '../components/NameAndGoldDisplay';
-import axios from 'axios';
+
+import {AuthContext} from '../contexts/Auth';
 
 const HomeScreen = ({navigation}) => {
-  const [char, setChar] = useState({});
-  useEffect(() => {
-    getCharacter();
-  }, []);
-  const getCharacter = async () => {
-    const response = await axios.get(
-      'https://dws-bug-hunters-api.vercel.app/api/characters',
-    );
-    const character = response.data.find(item => item.name === 'homelander');
-    setChar(character);
-  };
+  const {char, charStats, setCharStats} = useContext(AuthContext);
+
   return (
     <View style={styles.container}>
       <Header />
@@ -28,10 +20,10 @@ const HomeScreen = ({navigation}) => {
           goldValue={char.gold}
         />
         <View style={styles.statsBox}>
-          <StatsDisplay type="hp" value={char.hp} />
-          <StatsDisplay type="atk" value={char.atk} />
-          <StatsDisplay type="def" value={char.def} />
-          <StatsDisplay type="agi" value={char.agi} />
+          <StatsDisplay type="hp" value={charStats.hp} />
+          <StatsDisplay type="atk" value={charStats.atk} />
+          <StatsDisplay type="def" value={charStats.def} />
+          <StatsDisplay type="agi" value={charStats.agi} />
         </View>
       </View>
       <View style={styles.navigationBox}>

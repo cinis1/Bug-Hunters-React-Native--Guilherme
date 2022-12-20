@@ -29,7 +29,7 @@ const FactionButton = ({type, onPress, isSelected}) => {
       style={[
         styles.factionButton,
         {
-          borderColor: types[type].color,
+          borderColor: thisColor,
           backgroundColor: isSelected ? thisColor : 'transparent',
         },
       ]}

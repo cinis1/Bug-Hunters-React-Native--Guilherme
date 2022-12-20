@@ -1,25 +1,17 @@
-import {StyleSheet, SafeAreaView} from 'react-native';
-
 import AuthProvider from './src/contexts/AuthContext';
 import React from 'react';
 
-import Routes from './Routes';
+import Routes from './Routes/Routes';
+import {NavigationContainer} from '@react-navigation/native';
 
 const App = () => {
   return (
-    <SafeAreaView styles={styles.container}>
+    <NavigationContainer>
       <AuthProvider>
         <Routes />
       </AuthProvider>
-    </SafeAreaView>
+    </NavigationContainer>
   );
 };
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#11081A',
-  },
-});

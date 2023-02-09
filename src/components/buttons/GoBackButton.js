@@ -3,13 +3,13 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const GoBackButton = () => {
+const GoBackButton = ({logOut = false}) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
       onPress={() => navigation.goBack()}
       style={styles.backButton}>
-      <Icon name="arrow-left" size={25} color={'white'} />
+      <Icon name={logOut ? 'login' : 'arrow-left'} size={25} color={'white'} />
     </TouchableOpacity>
   );
 };

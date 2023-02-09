@@ -1,10 +1,10 @@
 import {StyleSheet, View, Image} from 'react-native';
 import React from 'react';
 import GoBackButton from './buttons/GoBackButton';
-const Header = () => {
+const Header = ({logOut = false}) => {
   return (
     <View style={styles.header}>
-      <GoBackButton />
+      <GoBackButton logOut={logOut} />
       <Image
         resizeMode="contain"
         style={styles.logo}

@@ -1,4 +1,11 @@
-import {StyleSheet, Text, View, FlatList, Alert} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Alert,
+  SafeAreaView,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Header from '../components/Header';
 import MainButton from '../components/buttons/MainButton';
@@ -22,7 +29,7 @@ const CharCreateScreen = ({navigation}) => {
     setFactions(response.data);
   };
   const postCharacter = async () => {
-    if (characterName && selectedFaction) {
+    if (characterName && selectedFaction && characterName.length >= 3) {
       const char = {
         atk: 10,
         def: 10,
@@ -48,48 +55,53 @@ const CharCreateScreen = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.headerView}>
-        <Header />
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <View style={styles.headerView}>
+          <Header />
+        </View>
+        <View style={styles.inputView}>
+          <Input
+            name={characterName}
+            setName={setCharacterName}
+            message={'Criar\nPersonagem'}
+          />
+        </View>
+        <View style={styles.factionSelect}>
+          <Text style={styles.charInputMessage}>Facção</Text>
+          <FlatList
+            contentContainerStyle={styles.factionSelectBox}
+            data={factions}
+            horizontal
+            renderItem={({item}) => (
+              <FactionButton
+                onPress={() => setSelectedFaction(item)}
+                type={item.name}
+                isSelected={selectedFaction.id === item.id}
+              />
+            )}
+          />
+        </View>
+        <View style={styles.createCharButtonBox}>
+          <MainButton
+            label="Criar"
+            navigation={navigation}
+            onPress={postCharacter}
+          />
+        </View>
       </View>
-      <View style={styles.inputView}>
-        <Input
-          name={characterName}
-          setName={setCharacterName}
-          message={'Criar\nPersonagem'}
-        />
-      </View>
-      <View style={styles.factionSelect}>
-        <Text style={styles.charInputMessage}>Facção</Text>
-        <FlatList
-          contentContainerStyle={styles.factionSelectBox}
-          data={factions}
-          horizontal
-          renderItem={({item}) => (
-            <FactionButton
-              onPress={() => setSelectedFaction(item)}
-              type={item.name}
-              isSelected={selectedFaction.id === item.id}
-            />
-          )}
-        />
-      </View>
-      <View style={styles.createCharButtonBox}>
-        <MainButton
-          label="Criar"
-          navigation={navigation}
-          onPress={postCharacter}
-        />
-      </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#11081A',
+  },
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    backgroundColor: '#11081A',
   },
   headerView: {
     height: 80,

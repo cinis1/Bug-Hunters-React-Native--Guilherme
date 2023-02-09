@@ -6,17 +6,19 @@ import {
   Alert,
   SafeAreaView,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Header from '../components/Header';
 import MainButton from '../components/buttons/MainButton';
 import FactionButton from '../components/buttons/FactionButton';
 import Input from '../components/Input';
 import axios from 'axios';
+import {AuthContext} from '../contexts/AuthContext';
 
 const CharCreateScreen = ({navigation}) => {
-  const [characterName, setCharacterName] = useState('');
   const [selectedFaction, setSelectedFaction] = useState({id: '', name: ''});
   const [factions, setFactions] = useState([]);
+  const {setChar, characterName, setCharacterName, authentication} =
+    useContext(AuthContext);
 
   useEffect(() => {
     getFactions();
@@ -49,7 +51,7 @@ const CharCreateScreen = ({navigation}) => {
       if (response.data.message !== 'Character created') {
         Alert.alert('Algo deu errado', response.data.message);
       } else {
-        navigation.navigate('Home');
+        authentication();
       }
     }
   };
@@ -121,6 +123,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: '700',
     paddingBottom: 30,
+    fontFamily: 'Poppins-Regular',
   },
 
   factionSelectBox: {

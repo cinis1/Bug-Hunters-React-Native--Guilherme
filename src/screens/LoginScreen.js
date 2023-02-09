@@ -4,7 +4,7 @@ import WelcomeHeader from '../components/WelcomeHeader';
 import GoBackButton from '../components/buttons/GoBackButton';
 import MainButton from '../components/buttons/MainButton';
 import Input from '../components/Input';
-import axios from 'axios';
+
 import {AuthContext} from '../contexts/AuthContext';
 
 const LoginScreen = ({navigation}) => {

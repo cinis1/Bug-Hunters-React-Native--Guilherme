@@ -1,17 +1,22 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
+import hpIcon from '../assets/images/icon-heart.png';
+import {AuthContext} from '../contexts/AuthContext';
 
-const EnemyDisplay = ({name}) => {
+import bug1 from '../assets/images/character-bug-1.png';
+import bug2 from '../assets/images/character-bug-2.png';
+import bug3 from '../assets/images/character-bug-3.png';
+import {BattleContext} from '../contexts/BattleContext';
+
+const EnemyDisplay = () => {
+  const {currentBug} = useContext(BattleContext);
   return (
-    <View style={styles.enemyBox}>
-      <Image
-        resizeMode="contain"
-        style={styles.enemyImage}
-        source={require('../assets/images/bug.png')}
-      />
-      <View style={styles.enemyNameBox}>
-        <Text style={styles.enemyName}>{name}</Text>
+    <View style={styles.container}>
+      <View style={styles.hpView}>
+        <Image source={hpIcon} resizeMode={'contain'} style={styles.icon} />
+        <Text style={styles.hp}>{currentBug.hp}</Text>
       </View>
+      <Image style={styles.image} resizeMode={'contain'} source={bug1} />
     </View>
   );
 };
@@ -19,25 +24,33 @@ const EnemyDisplay = ({name}) => {
 export default EnemyDisplay;
 
 const styles = StyleSheet.create({
-  enemyBox: {
+  container: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  enemyImage: {
-    width: 331,
-    height: 275,
-  },
-  enemyNameBox: {
-    width: '100%',
-    height: 54,
-    borderRadius: 10,
-    backgroundColor: '#2E2635',
+  hpView: {
+    flexDirection: 'row',
+    backgroundColor: 'rgba(72, 72, 72, 0.5)',
+    height: 45,
+    paddingVertical: 6,
+    paddingHorizontal: 16,
+    justifyContent: 'space-between',
     alignItems: 'center',
-    justifyContent: 'center',
+    borderRadius: 8,
+    marginBottom: 10,
   },
-  enemyName: {
-    fontWeight: '600',
+  icon: {
+    height: 25,
+    width: 25,
+    marginRight: 5,
+  },
+  hp: {
+    fontFamily: 'Poppins-Regular',
     color: 'white',
-    fontSize: 20,
+    fontSize: 25,
+  },
+  image: {
+    height: 125,
+    width: 125,
   },
 });

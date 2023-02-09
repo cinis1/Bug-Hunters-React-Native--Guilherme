@@ -4,7 +4,9 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import atkIcon from '../assets/images/icon-sword.png';
 import defIcon from '../assets/images/icon-shield.png';
 import hpIcon from '../assets/images/icon-heart.png';
+import agiIcon from '../assets/images/icon-agility.png';
 import BuyButton from './buttons/BuyButton';
+import GoldDisplay from './GoldDisplay';
 
 const stats = {
   atk: {
@@ -17,10 +19,10 @@ const stats = {
     icon: hpIcon,
   },
   agi: {
-    icon: atkIcon,
+    icon: agiIcon,
   },
 };
-const ItemBox = ({item}) => {
+const ItemBox = ({item, display = true, setIsLoading}) => {
   return (
     <View style={styles.itemBox}>
       <View style={styles.statBox}>
@@ -32,10 +34,21 @@ const ItemBox = ({item}) => {
         <Text style={styles.statValue}>+{item.affected_amount}</Text>
       </View>
       <View style={styles.rightHalfBox}>
-        <Text numberOfLines={1} style={styles.itemName}>
-          {item.name}
-        </Text>
-        <BuyButton item={item} />
+        <View style={styles.nameAndGold}>
+          <Text numberOfLines={1} style={styles.itemName}>
+            {item.name}
+          </Text>
+          {display && (
+            <GoldDisplay
+              type={'coin'}
+              goldValue={item.value}
+              height={14}
+              width={14}
+              fontSize={14}
+            />
+          )}
+        </View>
+        {display && <BuyButton item={item} setIsLoading={setIsLoading} />}
       </View>
     </View>
   );
@@ -57,9 +70,9 @@ const styles = StyleSheet.create({
     borderRightWidth: 1,
     borderRightColor: '#11081A',
     alignItems: 'center',
-    justifyContent: 'center',
     paddingHorizontal: 10,
     marginVertical: 15,
+    width: '30%',
   },
 
   rightHalfBox: {
@@ -69,6 +82,11 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 10,
   },
+  nameAndGold: {
+    flex: 1,
+    paddingRight: 10,
+  },
+
   statIcon: {
     height: 30,
     width: 30,
@@ -78,12 +96,14 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '700',
     marginLeft: 10,
+    fontFamily: 'Poppins-Regular',
   },
   itemName: {
-    flex: 1,
     fontSize: 16,
     fontWeight: '400',
     color: 'white',
+    fontFamily: 'Poppins-Regular',
+    borderColor: 'white',
     flexWrap: 'wrap',
   },
 });

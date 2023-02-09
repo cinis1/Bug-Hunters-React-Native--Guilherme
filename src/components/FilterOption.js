@@ -50,5 +50,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 12,
     fontWeight: '400',
+    fontFamily: 'Poppins-Regular',
   },
 });

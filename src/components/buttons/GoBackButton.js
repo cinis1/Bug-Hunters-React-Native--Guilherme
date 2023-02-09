@@ -7,7 +7,9 @@ const GoBackButton = ({logOut = false}) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => navigation.goBack()}
+      onPress={() =>
+        logOut ? navigation.navigate('Welcome') : navigation.goBack()
+      }
       style={styles.backButton}>
       <Icon name={logOut ? 'login' : 'arrow-left'} size={25} color={'white'} />
     </TouchableOpacity>

@@ -1,37 +1,52 @@
 import {StyleSheet, View, SafeAreaView} from 'react-native';
-import React, {useState, useEffect} from 'react';
 import Header from '../components/Header';
 import EnemyStatsDisplay from '../components/EnemyStatsDisplay';
-import EnemyDisplay from '../components/EnemyDisplay';
+import EnemyImage from '../components/EnemyImage';
 import MainButton from '../components/buttons/MainButton';
 import GoldDisplay from '../components/GoldDisplay';
-import axios from 'axios';
+import {AuthContext} from '../contexts/AuthContext';
+import React, {useContext, useState, useMemo} from 'react';
+import {BattleContext} from '../contexts/BattleContext';
 
-const StartBattle = () => {
-  const [bugs, setBugs] = useState({});
+const StartBattle = ({navigation}) => {
+  const {char, setChar} = useContext(AuthContext);
+  const {claimReward, currentQuest, startBattle} = useContext(BattleContext);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    getBugs();
-  }, []);
-
-  const getBugs = async () => {
-    const response = await axios.get(
-      'https://dws-bug-hunters-api.vercel.app/api/tasks',
-    );
-    setBugs(response.data[1].bugs[0]);
-  };
+  const hasBugs = useMemo(() => !!currentQuest?.bugs[0]?.id, [currentQuest]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <Header />
-        <EnemyDisplay name={bugs.name} />
-        <EnemyStatsDisplay enemy={bugs} />
+        {hasBugs ? (
+          <>
+            <EnemyImage name={currentQuest.bugs[0].name} />
+            <EnemyStatsDisplay enemy={currentQuest.bugs[0]} />
+          </>
+        ) : (
+          <EnemyImage name={'Não há inimigos'} enemy={false} />
+        )}
+
         <View style={styles.bottomView}>
           <View style={styles.goldBox}>
-            <GoldDisplay type={'gold'} />
+            <GoldDisplay
+              height={40}
+              width={40}
+              type={'gold'}
+              fontSize={24}
+              goldValue={currentQuest?.reward}
+            />
           </View>
-          <MainButton label={'Lutar'} />
+          {hasBugs ? (
+            <MainButton label={'Lutar'} onPress={startBattle} />
+          ) : (
+            <MainButton
+              isLoading={isLoading}
+              label={'Receber recompensa'}
+              onPress={claimReward}
+            />
+          )}
         </View>
       </View>
     </SafeAreaView>

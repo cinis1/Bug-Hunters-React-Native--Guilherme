@@ -3,6 +3,7 @@ import React from 'react';
 import swordImg from '../assets/images/icon-sword.png';
 import shieldImg from '../assets/images/icon-shield.png';
 import hpImg from '../assets/images/icon-heart.png';
+import agiImg from '../assets/images/icon-agility.png';
 
 const StatsDisplay = ({type, value}) => {
   const types = {
@@ -20,7 +21,7 @@ const StatsDisplay = ({type, value}) => {
     },
     agi: {
       label: 'Agilidade',
-      img: swordImg,
+      img: agiImg,
     },
   };
   return (
@@ -59,9 +60,11 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontWeight: '600',
     flex: 1,
+    fontFamily: 'Poppins-Regular',
   },
   statValue: {
-    color: 'white',
+    color: '#3BDA5E',
     fontSize: 20,
+    fontFamily: 'Poppins-Regular',
   },
 });

@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: '700',
     marginBottom: 10,
+    fontFamily: 'Poppins-Regular',
   },
   charInputBox: {
     borderWidth: 1,

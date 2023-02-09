@@ -42,11 +42,7 @@ const QuestsScreen = ({navigation}) => {
             data={quests}
             extraData={quests}
             renderItem={({item}) => (
-              <QuestBox
-                navigation={navigation}
-                name={item.name}
-                reward={item.reward}
-              />
+              <QuestBox navigation={navigation} quest={item} />
             )}
           />
         )}
@@ -75,6 +71,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 32,
     color: 'white',
+    fontFamily: 'Poppins-Regular',
   },
   questBoard: {
     flex: 1,

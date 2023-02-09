@@ -2,13 +2,26 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import GoldDisplay from './GoldDisplay';
 
-const NameAndGoldDisplay = ({message, type, goldValue}) => {
+const NameAndGoldDisplay = ({
+  message,
+  type,
+  goldValue,
+  height,
+  width,
+  fontSize,
+}) => {
   return (
     <View style={styles.infoBoxHeader}>
       <View style={styles.charNameView}>
         <Text style={styles.charNameDisplay}>{message}</Text>
       </View>
-      <GoldDisplay type={type} goldValue={goldValue} />
+      <GoldDisplay
+        type={type}
+        goldValue={goldValue}
+        height={height}
+        width={width}
+        fontSize={fontSize}
+      />
     </View>
   );
 };
@@ -20,6 +33,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 32,
     fontWeight: '700',
+    fontFamily: 'Poppins-Regular',
   },
 
   infoBoxHeader: {
@@ -30,15 +44,5 @@ const styles = StyleSheet.create({
   goldDisplayBox: {
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  goldDisplay: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: 'gold',
-    marginLeft: 10,
-  },
-  coinIcon: {
-    height: 20,
-    width: 20,
   },
 });

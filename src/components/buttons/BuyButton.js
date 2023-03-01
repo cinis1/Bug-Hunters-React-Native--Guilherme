@@ -9,7 +9,7 @@ const BuyButton = ({item, setIsLoading}) => {
 
   const BuyItem = async () => {
     const newItem = char.equipment.filter(e => e.id === item.id);
-    console.log(newItem.length);
+
     if (char.gold >= item.value && newItem.length === 0) {
       setIsLoading(true);
       const updatedEquipment = [...char.equipment, item];

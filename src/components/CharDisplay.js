@@ -7,15 +7,11 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
   withDelay,
-  withRepeat,
   withSequence,
-  SlideInDown,
   SlideInUp,
   SlideInLeft,
   FadeInUp,
   useSharedValue,
-  interpolate,
-  withSpring,
   FadeInDown,
 } from 'react-native-reanimated';
 
@@ -32,18 +28,24 @@ export const models = {
       homeHeight: 136,
       homeWidth: 127,
       animation: FadeInUp,
+      iconHeight: 50,
+      iconWidth: 50,
     },
     mobile: {
       model: charMobile,
       homeHeight: 156,
       homeWidth: 167,
       animation: FadeInDown,
+      iconHeight: 50,
+      iconWidth: 50,
     },
     backend: {
       model: charBackend,
       homeHeight: 156,
       homeWidth: 137,
       animation: SlideInLeft,
+      iconHeight: 50,
+      iconWidth: 50,
     },
   },
 };
@@ -52,7 +54,6 @@ const CharDisplay = () => {
   const {charStats} = useContext(AuthContext);
   const {battleState, setBattleState, isPlayerAttacking} =
     useContext(BattleContext);
-  console.log(battleState);
 
   const characterXPosition = useSharedValue(0);
   const characterYPosition = useSharedValue(0);
@@ -129,6 +130,10 @@ const CharDisplay = () => {
       ),
       withDelay(totalDuration * 0.4, withTiming(0)),
     );
+    charOpacity.value = withSequence(
+      withDelay(totalDuration, withTiming(0, totalDuration * 0.5)),
+      withTiming(1, totalDuration * 0.1),
+    );
   };
 
   useEffect(() => {
@@ -144,13 +149,12 @@ const CharDisplay = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.hpView}>
+      {/* <View style={styles.hpView}>
         <Image source={hpIcon} resizeMode={'contain'} style={styles.icon} />
         <Text style={styles.hp}>{charStats.hp}</Text>
-      </View>
+      </View> */}
 
       <Animated.Image
-        onLayout={console.log}
         style={[styles.image, charAnimatedStyle]}
         resizeMode="contain"
         source={
@@ -181,7 +185,7 @@ const styles = StyleSheet.create({
   },
   hpView: {
     flexDirection: 'row',
-    backgroundColor: 'rgba(72, 72, 72, 0.5)',
+    backgroundColor: 'rgba(48, 48, 48, 0.5)',
     height: 45,
     paddingVertical: 6,
     paddingHorizontal: 16,

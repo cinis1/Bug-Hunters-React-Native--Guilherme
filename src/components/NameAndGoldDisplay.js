@@ -13,7 +13,9 @@ const NameAndGoldDisplay = ({
   return (
     <View style={styles.infoBoxHeader}>
       <View style={styles.charNameView}>
-        <Text style={styles.charNameDisplay}>{message}</Text>
+        <Text numberOfLines={1} style={styles.charNameDisplay}>
+          {message}
+        </Text>
       </View>
       <GoldDisplay
         type={type}

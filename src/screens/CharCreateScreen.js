@@ -42,12 +42,12 @@ const CharCreateScreen = ({navigation}) => {
         equipment: [],
         factions: [selectedFaction],
       };
-      console.log({char});
+
       const response = await axios.post(
         'https://dws-bug-hunters-api.vercel.app/api/characters',
         char,
       );
-      console.log({response: response.data});
+
       if (response.data.message !== 'Character created') {
         Alert.alert('Algo deu errado', response.data.message);
       } else {

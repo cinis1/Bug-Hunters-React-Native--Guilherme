@@ -7,20 +7,31 @@ export const BattleContext = createContext({});
 
 const BattleProvider = ({children}) => {
   const {charStats, char, setChar} = useContext(AuthContext);
-  console.log(charStats);
   const [currentQuest, setCurrentQuest] = useState(null);
-  const [turn, setTurn] = useState('Player');
+  const [turn, setTurn] = useState(null);
   const [currentBug, setCurrentBug] = useState(null);
   const [currentPlayer, setCurrentPlayer] = useState(null);
   const [battleState, setBattleState] = useState('Not started'); //Not started, In progress, Win, Lose
   const navigation = useNavigation();
   const [isPlayerAttacking, setIsPlayerAttacking] = useState(false);
-
+  const [isEnemyAttacking, setIsEnemyAttacking] = useState(false);
+  const [battleHistoryLogs, setBattleHistoryLogs] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [playerMaxHp, setPlayerMaxHp] = useState(0);
   /*
 1-criar lista em state dos logs
 2-adicionar as infos quem atacou  e tal
 
 */
+
+  const definePrio = () => {
+    if (currentPlayer.agi >= currentBug.agi) {
+      setTurn('player');
+    } else {
+      setTurn('bug');
+    }
+  };
+
   const charTurn = async () => {
     if (battleState !== 'In progress') {
       return;
@@ -33,28 +44,89 @@ const BattleProvider = ({children}) => {
     setIsPlayerAttacking(false);
     if (newBugHp <= 0) {
       setCurrentBug({...currentBug, hp: 0});
+      setBattleHistoryLogs([
+        ...battleHistoryLogs,
+        {
+          character: 'player',
+          damage: damage,
+          log: `${damage} de dano`,
+          time: new Date().getHours() + ':' + new Date().getMinutes(),
+        },
+      ]);
       setBattleState('Win');
+      return;
     }
     if (newBugHp > currentBug.hp) {
-      setCurrentBug({...currentBug});
+      setBattleHistoryLogs([
+        ...battleHistoryLogs,
+        {
+          character: 'player',
+          damage: damage,
+          log: '0 de dano',
+          time: new Date().getHours() + ':' + new Date().getMinutes(),
+        },
+      ]);
+      setTurn('Bug');
     } else {
       setCurrentBug({...currentBug, hp: newBugHp});
+      setBattleHistoryLogs([
+        ...battleHistoryLogs,
+        {
+          character: 'player',
+          damage: damage,
+          log: `${damage} de dano`,
+          time: new Date().getHours() + ':' + new Date().getMinutes(),
+        },
+      ]);
       setTurn('Bug');
     }
   };
+
   const delay = ms => {
     return new Promise(resolve => setTimeout(resolve, ms));
   };
 
-  const enemyTurn = () => {
+  const enemyTurn = async () => {
     const damage = currentBug.atk - currentPlayer.def;
     const newPlayerHp = currentPlayer.hp - damage;
-
+    setIsEnemyAttacking(true);
+    await delay(900);
+    setIsEnemyAttacking(false);
     if (newPlayerHp <= 0) {
       setCurrentPlayer({...currentPlayer, hp: 0});
       setBattleState('Lose');
+      setBattleHistoryLogs([
+        ...battleHistoryLogs,
+        {
+          character: 'enemy',
+          damage: damage,
+          log: `${damage} de dano`,
+          time: new Date().getHours() + ':' + new Date().getMinutes(),
+        },
+      ]);
+    }
+    if (damage <= 0) {
+      setBattleHistoryLogs([
+        ...battleHistoryLogs,
+        {
+          character: 'enemy',
+          damage: damage,
+          log: '0 de dano',
+          time: new Date().getHours() + ':' + new Date().getMinutes(),
+        },
+      ]);
+      setTurn('Player');
     } else {
       setCurrentPlayer({...currentPlayer, hp: newPlayerHp});
+      setBattleHistoryLogs([
+        ...battleHistoryLogs,
+        {
+          character: 'enemy',
+          damage: damage,
+          log: `${damage} de dano`,
+          time: new Date().getHours() + ':' + new Date().getMinutes(),
+        },
+      ]);
       setTurn('Player');
     }
   };
@@ -80,10 +152,15 @@ const BattleProvider = ({children}) => {
 
   const startBattle = () => {
     setBattleState('In progress');
+    setBattleHistoryLogs([]);
+    definePrio();
+    setPlayerMaxHp(char.hp);
     navigation.navigate('Battle');
   };
 
   const claimReward = async () => {
+    setIsLoading(true);
+    await delay(100);
     await axios.patch('https://dws-bug-hunters-api.vercel.app/api/characters', {
       gold: char.gold + currentQuest.reward,
       id: char.id,
@@ -92,15 +169,17 @@ const BattleProvider = ({children}) => {
       'https://dws-bug-hunters-api.vercel.app/api/characters',
     );
     setChar(response.data.find(item => item.name === char.name));
+
+    setIsLoading(false);
   };
 
   const removeItem = async () => {
     console.log('You lost and one of your equipments was broken');
-    const updatedGear = char.equipment.splice(
-      Math.random() * char.equipment.length,
+    const updatedGear = char.equipment;
+    const deletedGear = updatedGear.splice(
+      Math.random() * updatedGear.length,
+      1,
     );
-    console.log(updatedGear);
-
     await axios.patch('https://dws-bug-hunters-api.vercel.app/api/characters', {
       equipment: updatedGear,
       id: char.id,
@@ -117,10 +196,10 @@ const BattleProvider = ({children}) => {
   }, [charStats]);
 
   useEffect(() => {
-    if (turn === 'Bug' || battleState === 'In progress') {
+    if (turn === 'Bug' && battleState === 'In progress') {
       enemyTurn();
     }
-  }, [turn, battleState]);
+  }, [turn]);
 
   useEffect(() => {
     if (battleState === 'In Progress') {
@@ -150,6 +229,13 @@ const BattleProvider = ({children}) => {
         setBattleState,
         isPlayerAttacking,
         setIsPlayerAttacking,
+        isLoading,
+        setIsLoading,
+        battleHistoryLogs,
+        setBattleHistoryLogs,
+        isEnemyAttacking,
+        currentPlayer,
+        playerMaxHp,
       }}>
       {children}
     </BattleContext.Provider>

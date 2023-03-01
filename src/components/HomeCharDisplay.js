@@ -22,7 +22,9 @@ const HomeCharDisplay = () => {
         ]}
       />
       <View style={styles.charName}>
-        <Text style={styles.charNameDisplay}>{char.name}</Text>
+        <Text numberOfLines={1} style={styles.charNameDisplay}>
+          {char.name}
+        </Text>
         <GoldDisplay
           type={'coin'}
           goldValue={char.gold}
@@ -42,6 +44,7 @@ export default HomeCharDisplay;
 const styles = StyleSheet.create({
   charName: {
     justifyContent: 'flex-end',
+    flex: 1,
   },
   image: {
     height: 156,

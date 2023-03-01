@@ -33,7 +33,9 @@ const GoldDisplay = ({
         style={[{height: height, width: width}]}
         source={types[type].icon}
       />
-      <Text style={[styles.goldDisplay, {fontSize: fontSize}]}>
+      <Text
+        numberOfLines={1}
+        style={[styles.goldDisplay, {fontSize: fontSize}]}>
         {goldValue}
       </Text>
     </View>

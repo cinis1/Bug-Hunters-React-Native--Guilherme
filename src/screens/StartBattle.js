@@ -5,15 +5,18 @@ import EnemyImage from '../components/EnemyImage';
 import MainButton from '../components/buttons/MainButton';
 import GoldDisplay from '../components/GoldDisplay';
 import {AuthContext} from '../contexts/AuthContext';
-import React, {useContext, useState, useMemo} from 'react';
+import React, {useContext, useMemo} from 'react';
 import {BattleContext} from '../contexts/BattleContext';
 
 const StartBattle = ({navigation}) => {
-  const {char, setChar} = useContext(AuthContext);
-  const {claimReward, currentQuest, startBattle} = useContext(BattleContext);
-  const [isLoading, setIsLoading] = useState(false);
+  const {claimReward, currentQuest, startBattle, isLoading} =
+    useContext(BattleContext);
 
   const hasBugs = useMemo(() => !!currentQuest?.bugs[0]?.id, [currentQuest]);
+  const onPress = () => {
+    claimReward();
+    navigation.navigate('Home');
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -44,7 +47,7 @@ const StartBattle = ({navigation}) => {
             <MainButton
               isLoading={isLoading}
               label={'Receber recompensa'}
-              onPress={claimReward}
+              onPress={onPress}
             />
           )}
         </View>

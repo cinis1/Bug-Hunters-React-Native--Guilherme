@@ -18,7 +18,7 @@ const StoreScreen = () => {
   const [items, setItems] = useState([]);
   const [selectedFilter, setFilter] = useState('all');
   const [isLoading, setIsLoading] = useState(false);
-  const {char, setCharStats} = useContext(AuthContext);
+  const {char} = useContext(AuthContext);
 
   useEffect(() => {
     getItems();

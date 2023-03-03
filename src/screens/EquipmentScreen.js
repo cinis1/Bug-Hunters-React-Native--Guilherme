@@ -7,17 +7,15 @@ import {
   ScrollView,
   Text,
 } from 'react-native';
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import Header from '../components/Header';
-import ItemBox from '../components/ItemBox';
-import axios from 'axios';
 import FilterOption from '../components/FilterOption';
 import {checkItem} from './StoreScreen';
 import {AuthContext} from '../contexts/AuthContext';
 
 const EquipmentScreen = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [items, setItems] = useState([]);
+  const [isLoading] = useState(false);
+
   const [selectedFilter, setFilter] = useState('all');
   const {char} = useContext(AuthContext);
 

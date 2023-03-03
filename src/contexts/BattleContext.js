@@ -40,7 +40,13 @@ const BattleProvider = ({children}) => {
     const newBugHp = currentBug.hp - damage;
 
     setIsPlayerAttacking(true);
-    await delay(900);
+    currentPlayer.factions[0].name.toLowerCase() === 'backend' &&
+      (await delay(900));
+    currentPlayer.factions[0].name.toLowerCase() === 'frontend' &&
+      (await delay(900));
+    currentPlayer.factions[0].name.toLowerCase() === 'mobile' &&
+      (await delay(1600));
+
     setIsPlayerAttacking(false);
     if (newBugHp <= 0) {
       setCurrentBug({...currentBug, hp: 0});
@@ -87,10 +93,17 @@ const BattleProvider = ({children}) => {
   };
 
   const enemyTurn = async () => {
+    currentPlayer.factions[0].name.toLowerCase() === 'backend' &&
+      (await delay(500));
+    currentPlayer.factions[0].name.toLowerCase() === 'frontend' &&
+      (await delay(500));
+    currentPlayer.factions[0].name.toLowerCase() === 'mobile' &&
+      (await delay(900));
     const damage = currentBug.atk - currentPlayer.def;
     const newPlayerHp = currentPlayer.hp - damage;
     setIsEnemyAttacking(true);
     await delay(900);
+
     setIsEnemyAttacking(false);
     if (newPlayerHp <= 0) {
       setCurrentPlayer({...currentPlayer, hp: 0});

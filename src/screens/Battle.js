@@ -7,9 +7,7 @@ import {
   FlatList,
 } from 'react-native';
 import React, {useContext, useEffect, useRef, useState} from 'react';
-import Header from '../components/Header';
 import MainButton from '../components/buttons/MainButton';
-import axios from 'axios';
 import battleBackground from '../assets/images/background-battle.png';
 import CharDisplay from '../components/CharDisplay';
 import EnemyDisplay from '../components/EnemyDisplay';
@@ -25,15 +23,16 @@ const Battle = ({navigation}) => {
   const {battleState, setBattleState, battleHistoryLogs} =
     useContext(BattleContext);
   const animation = useRef(null);
-  const [animationPressed, setAnimationPressed] = useState(true);
+  const [animationPressed, setAnimationPressed] = useState(false);
 
   const onPress = () => {
     setBattleState('Not started');
     navigation.navigate('Home');
   };
-  // useEffect(() => {
-  //   animation.current.play(0, 66);
-  // }, []);
+  useEffect(() => {
+    animation.current.play(0, 66);
+  }, []);
+
   const checkLogs = item => {
     if (item !== undefined) {
       return <BattleLogBox item={item} />;
@@ -74,7 +73,6 @@ const Battle = ({navigation}) => {
               <View style={styles.button}>
                 {battleState === 'Win' || battleState === 'Lose' ? (
                   <MainButton
-                    // isLoading={isLoading}
                     label={
                       battleState === 'Win'
                         ? 'Receber recompensa'

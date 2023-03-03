@@ -7,8 +7,6 @@ import bug1 from '../assets/images/character-bug-1.png';
 import Animated, {
   useAnimatedStyle,
   withTiming,
-  withDelay,
-  withSequence,
   useSharedValue,
   interpolate,
 } from 'react-native-reanimated';
@@ -89,21 +87,20 @@ const HpBar = ({character = 'player', side = 'left'}) => {
         </Text>
       </View>
       <View style={styles.lowerHalf}>
-        <View style={styles.hpBarView}>
-          <Animated.View
-            style={[
-              styles.hpBar,
-              hpBarAnimatedStyle,
-              {
-                alignItems: character === 'player' ? 'flex-end' : 'flex-start',
-                flexDirection: side === 'left' ? 'column' : 'row-reverse',
-              },
-            ]}
-          />
+        <View
+          style={[
+            styles.hpBarView,
+            {
+              justifyContent: side === 'left' ? 'flex-start' : 'flex-end',
+            },
+          ]}>
+          <Animated.View style={[styles.hpBar, hpBarAnimatedStyle]} />
           <Text
             style={[
               styles.hpValue,
-              {alignSelf: side === 'left' ? 'flex-end' : 'flex-start'},
+              {
+                alignSelf: side === 'left' ? 'center' : 'center',
+              },
             ]}>
             {character === 'player'
               ? `${currentPlayer.hp}/${charStats.hp}`
@@ -121,9 +118,7 @@ const styles = StyleSheet.create({
   container: {
     paddingBottom: 10,
   },
-  upperHalf: {
-    alignItems: 'center',
-  },
+  upperHalf: {},
   name: {
     fontFamily: 'Poppins-Regular',
     fontWeight: '600',
@@ -140,6 +135,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(48, 48, 48, 0.5)',
     overflow: 'hidden',
     justifyContent: 'center',
+    flexDirection: 'row-reverse',
   },
   hpBar: {
     backgroundColor: '#EC2127',
@@ -148,6 +144,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
+    flexDirection: 'row-reverse',
   },
   hpValue: {
     fontFamily: 'Poppins-Regular',

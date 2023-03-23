@@ -7,25 +7,37 @@ const types = {
   coin: {
     icon: coinIcon,
     style: 'coinIcon',
-    height: 20,
-    width: 20,
   },
   gold: {
     icon: goldIcon,
-    height: 50,
-    width: 50,
   },
 };
 
-const GoldDisplay = ({type, goldValue}) => {
+const GoldDisplay = ({
+  type,
+  goldValue,
+  height,
+  width,
+  fontSize,
+  alignSelf = 'auto',
+  marginBottom = 0,
+}) => {
   return (
-    <View style={styles.goldDisplayBox}>
+    <View
+      style={[
+        styles.goldDisplayBox,
+        {alignSelf: alignSelf, marginBottom: marginBottom},
+      ]}>
       <Image
         resizeMode="contain"
-        style={[{height: types[type].height, width: types[type].width}]}
+        style={[{height: height, width: width}]}
         source={types[type].icon}
       />
-      <Text style={styles.goldDisplay}>{goldValue}</Text>
+      <Text
+        numberOfLines={1}
+        style={[styles.goldDisplay, {fontSize: fontSize}]}>
+        {goldValue}
+      </Text>
     </View>
   );
 };
@@ -42,5 +54,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: 'gold',
     marginLeft: 10,
+    fontFamily: 'Poppins-Regular',
+    flexWrap: 'wrap',
   },
 });

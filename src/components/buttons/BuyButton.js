@@ -1,8 +1,42 @@
 import {Alert, StyleSheet, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {AuthContext} from '../../contexts/AuthContext';
+import axios from 'axios';
 
-const BuyButton = ({item}) => {
+const BuyButton = ({item, setIsLoading}) => {
+  const {char, setChar} = useContext(AuthContext);
+
+  const BuyItem = async () => {
+    const newItem = char.equipment.filter(e => e.id === item.id);
+
+    if (char.gold >= item.value && newItem.length === 0) {
+      setIsLoading(true);
+      const updatedEquipment = [...char.equipment, item];
+
+      await axios.patch(
+        'https://dws-bug-hunters-api.vercel.app/api/characters',
+        {
+          gold: char.gold - item.value,
+          equipment: updatedEquipment,
+          id: char.id,
+        },
+      );
+      const response = await axios.get(
+        'https://dws-bug-hunters-api.vercel.app/api/characters',
+      );
+      setChar(response.data.find(item => item.name === char.name));
+
+      setIsLoading(false);
+      return console.log(`${item.name} purchased`);
+    }
+    if (char.gold < item.value) {
+      return console.log('Insufficient funds');
+    } else {
+      return console.log('You already own that item');
+    }
+  };
+
   const confirmPurchase = () => {
     Alert.alert(
       'Confirm purchase',
@@ -10,7 +44,7 @@ const BuyButton = ({item}) => {
       [
         {
           text: 'buy',
-          onPress: () => console.log(`${item.name} purchased`),
+          onPress: () => BuyItem(),
         },
         {
           text: 'cancel',

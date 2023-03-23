@@ -6,6 +6,7 @@ import StatsDisplay from '../components/Statsdisplay';
 import NameAndGoldDisplay from '../components/NameAndGoldDisplay';
 
 import {AuthContext} from '../contexts/AuthContext';
+import HomeCharDisplay from '../components/HomeCharDisplay';
 
 const HomeScreen = ({navigation}) => {
   const {char, charStats, setCharStats} = useContext(AuthContext);
@@ -15,11 +16,7 @@ const HomeScreen = ({navigation}) => {
       <View style={styles.container}>
         <Header logOut={true} />
         <View style={styles.charInfoBox}>
-          <NameAndGoldDisplay
-            message={char.name}
-            type={'coin'}
-            goldValue={char.gold}
-          />
+          <HomeCharDisplay />
           <View style={styles.statsBox}>
             <StatsDisplay type="hp" value={charStats.hp} />
             <StatsDisplay type="atk" value={charStats.atk} />
@@ -28,6 +25,11 @@ const HomeScreen = ({navigation}) => {
           </View>
         </View>
         <View style={styles.navigationBox}>
+          <ScreenButton
+            navigation={navigation}
+            marginBottom={30}
+            type="equipment"
+          />
           <ScreenButton
             navigation={navigation}
             marginBottom={30}

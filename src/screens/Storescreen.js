@@ -6,17 +6,19 @@ import {
   SafeAreaView,
   ActivityIndicator,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Header from '../components/Header';
 import ItemBox from '../components/ItemBox';
 import FilterOption from '../components/FilterOption';
 import NameAndGoldDisplay from '../components/NameAndGoldDisplay';
 import axios from 'axios';
+import {AuthContext} from '../contexts/AuthContext';
 
 const StoreScreen = () => {
   const [items, setItems] = useState([]);
   const [selectedFilter, setFilter] = useState('all');
   const [isLoading, setIsLoading] = useState(false);
+  const {char} = useContext(AuthContext);
 
   useEffect(() => {
     getItems();
@@ -31,21 +33,19 @@ const StoreScreen = () => {
     setIsLoading(false);
   };
 
-  const checkItem = ({item}) => {
-    if (
-      item.affected_attribute === selectedFilter ||
-      selectedFilter === 'all'
-    ) {
-      return <ItemBox item={item} />;
-    }
-  };
-
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <Header />
         <View style={styles.infoBoxHeader}>
-          <NameAndGoldDisplay message={'Loja'} type="coin" />
+          <NameAndGoldDisplay
+            message={'Loja'}
+            goldValue={char.gold}
+            type="coin"
+            height={24}
+            width={24}
+            fontSize={24}
+          />
         </View>
         <ScrollView horizontal style={styles.filterBox}>
           <FilterOption type={'all'} onPress={() => setFilter('all')} />
@@ -60,7 +60,9 @@ const StoreScreen = () => {
           <FlatList
             contentContainerStyle={styles.itemList}
             data={items}
-            renderItem={({item}) => checkItem({item})}
+            renderItem={({item}) =>
+              checkItem({item, selectedFilter, setIsLoading})
+            }
           />
         )}
       </View>
@@ -104,3 +106,21 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
+
+export const checkItem = ({
+  item,
+  selectedFilter,
+  setIsLoading,
+  display = true,
+}) => {
+  if (item.affected_attribute === selectedFilter || selectedFilter === 'all') {
+    return (
+      <ItemBox
+        item={item}
+        buy={true}
+        display={display}
+        setIsLoading={setIsLoading}
+      />
+    );
+  }
+};

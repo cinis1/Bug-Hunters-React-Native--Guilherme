@@ -1,10 +1,28 @@
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {StyleSheet, TouchableOpacity} from 'react-native';
+import React, {useContext} from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-const PlayButton = ({navigation}) => {
+import {AuthContext} from '../../contexts/AuthContext';
+import {BattleContext} from '../../contexts/BattleContext';
+
+const PlayButton = ({navigation, quest}) => {
+  const {setSelectedQuest, setEnemyStats} = useContext(AuthContext);
+  const {onFocusQuest} = useContext(BattleContext);
+
+  const addEquipmentStats = () => {
+    const stats = Object.assign({}, quest.bugs[0]);
+    if (stats.equipment !== undefined) {
+      stats.equipment.forEach(equipment => {
+        if (equipment !== null && equipment !== undefined) {
+          stats[equipment.affected_attribute] += equipment.affected_amount;
+        }
+      });
+    }
+    setEnemyStats({...stats, maxHp: stats.hp});
+  };
+
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('Start')}
+      onPress={() => onFocusQuest(quest)}
       style={styles.playButton}>
       <Icon name="play" size={30} color={'white'} />
     </TouchableOpacity>

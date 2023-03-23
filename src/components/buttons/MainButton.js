@@ -52,5 +52,6 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     color: 'white',
     alignSelf: 'center',
+    fontFamily: 'Poppins-Regular',
   },
 });

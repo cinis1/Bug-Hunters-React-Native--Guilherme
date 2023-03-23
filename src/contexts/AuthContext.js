@@ -7,15 +7,17 @@ export const AuthContext = createContext({});
 const AuthProvider = ({children}) => {
   const [char, setChar] = useState(null);
   const [charStats, setCharStats] = useState({});
-  const [characterName, setCharacterName] = useState('');
+
+  const [enemyStats, setEnemyStats] = useState({});
+  const [characterName, setCharacterName] = useState('Homelander');
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedQuest, setSelectedQuest] = useState({});
 
   const navigation = useNavigation();
 
   useEffect(() => {
-    console.log('usuari', char);
     if (char !== null) {
-      addEquipmentStats();
+      addEquipmentStats(char);
     }
   }, [char]);
 
@@ -28,7 +30,6 @@ const AuthProvider = ({children}) => {
         }
       });
     }
-
     setCharStats(stats);
   };
   const authentication = async () => {
@@ -36,7 +37,9 @@ const AuthProvider = ({children}) => {
     const response = await axios.get(
       'https://dws-bug-hunters-api.vercel.app/api/characters',
     );
-    const character = response.data.find(item => item.name === characterName);
+    const character = response.data.find(
+      item => item.name.toLowerCase() === characterName.toLowerCase(),
+    );
 
     if (character === null || character === undefined) {
       console.log('Character not found');
@@ -58,6 +61,10 @@ const AuthProvider = ({children}) => {
         characterName,
         setCharacterName,
         isLoading,
+        selectedQuest,
+        setSelectedQuest,
+        enemyStats,
+        setEnemyStats,
       }}>
       {children}
     </AuthContext.Provider>

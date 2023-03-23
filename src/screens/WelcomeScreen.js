@@ -75,6 +75,8 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 40,
     textAlign: 'center',
+    lineHeight: 45,
+    fontFamily: 'Poppins-Regular',
   },
   welcomeMessageFragment: {
     fontWeight: '700',
@@ -85,6 +87,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     marginTop: 10,
+    fontFamily: 'Poppins-Regular',
   },
 });
 export default WelcomeScreen;

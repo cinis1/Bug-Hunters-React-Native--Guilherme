@@ -32,5 +32,6 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: '700',
     alignSelf: 'center',
+    fontFamily: 'Poppins-Regular',
   },
 });
